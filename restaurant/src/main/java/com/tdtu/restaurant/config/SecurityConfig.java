@@ -46,7 +46,9 @@ public class SecurityConfig {
                                 .requestMatchers("/login").permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin(login -> login.loginProcessingUrl("/login-process").permitAll())
+                .formLogin(login -> login.loginProcessingUrl("/login-process")
+                        .defaultSuccessUrl("/api/home", true)
+                        .permitAll())
                 .authenticationManager(authenticationManager)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
