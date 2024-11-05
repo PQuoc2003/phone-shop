@@ -1,6 +1,6 @@
 package com.tdtu.restaurant.config;
 
-import com.tdtu.restaurant.dto.LoginRequest;
+import com.tdtu.restaurant.models.MyUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,10 +10,10 @@ public class CustomUserDetails implements UserDetails {
 
 
 
-    private final LoginRequest loginRequest;
+    private final MyUser user;
 
-    public CustomUserDetails(LoginRequest loginRequest) {
-        this.loginRequest = loginRequest;
+    public CustomUserDetails(MyUser user) {
+        this.user = user;
     }
 
     @Override
@@ -23,11 +23,11 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return loginRequest.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return loginRequest.getUsername();
+        return user.getUserName();
     }
 }
