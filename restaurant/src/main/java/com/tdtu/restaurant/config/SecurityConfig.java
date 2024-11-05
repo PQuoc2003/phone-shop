@@ -53,6 +53,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(author ->
                         author
                                 .requestMatchers("/login").permitAll()
+                                .requestMatchers("/test/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(login -> login.loginProcessingUrl("/login-process")
