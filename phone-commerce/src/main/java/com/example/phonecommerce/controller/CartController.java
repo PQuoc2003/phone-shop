@@ -30,18 +30,18 @@ public class CartController {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(userName);
 
-        boolean hasAdminRole = SecurityContextHolder
+        boolean hasManagerRole = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getAuthorities()
                 .stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLES_ADMIN"));
+                .anyMatch(r -> r.getAuthority().equals("ROLES_MANAGER"));
 
         if (user == null) return "redirect:/login";
 
         Long userId = user.getId();
         model.addAttribute("userId", userId);
-        model.addAttribute("hasAdminRole", hasAdminRole);
+        model.addAttribute("hasManagerRole", hasManagerRole);
         return "cart";
     }
 

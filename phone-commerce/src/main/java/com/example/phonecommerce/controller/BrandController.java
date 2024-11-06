@@ -23,42 +23,42 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    @GetMapping(value = {"/admin/brand"})
+    @GetMapping(value = {"/manager/brand"})
     public String Brands(Model model) {
         List<Brand> brands = brandService.getAllBrand();
         model.addAttribute("brands", brands);
-        return "admin_template/admin_brand";
+        return "manager_template/manager_brand";
     }
 
-    @GetMapping(value = {"/admin/brand/add"})
+    @GetMapping(value = {"/manager/brand/add"})
     public String addBrandPage(Model model) {
         model.addAttribute("brand", new Brand());
-        return "admin_template/admin_add-brand";
+        return "manager_template/manager_add-brand";
     }
 
-    @PostMapping(value = {"/admin/brand/add"})
+    @PostMapping(value = {"/manager/brand/add"})
     public String addBrandProcess(@ModelAttribute("brand") Brand brand) {
         brandService.addBrand(brand);
-        return "redirect:/admin/brand";
+        return "redirect:/manager/brand";
     }
 
-    @GetMapping("/admin/brand/edit/{id}")
+    @GetMapping("/manager/brand/edit/{id}")
     public String editBrandPage(@PathVariable("id") Long id, Model model) {
         Brand brand = brandService.getBrandById(id);
         model.addAttribute("brand", brand);
-        return "admin_template/admin_edit-brand";
+        return "manager_template/manager_edit-brand";
     }
 
-    @PostMapping("/admin/brand/edit/{id}")
+    @PostMapping("/manager/brand/edit/{id}")
     public String editBrandProcess(@ModelAttribute("brand") Brand updatedBrand) {
         brandService.updateBrand(updatedBrand);
-        return "redirect:/admin/brand";
+        return "redirect:/manager/brand";
     }
 
-    @GetMapping("/admin/brand/delete/{id}")
+    @GetMapping("/manager/brand/delete/{id}")
     public String deleteBrand(@PathVariable Long id) {
         brandService.deleteBrandById(id);
-        return "redirect:/admin/brand";
+        return "redirect:/manager/brand";
     }
 
 

@@ -40,14 +40,14 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping(value = "/admin/product")
+    @GetMapping(value = "/manager/product")
     public String productAdminPage(Model model) {
         List<Product> productList = productService.getAllProducts();
         model.addAttribute("products", productList);
-        return "admin_template/admin_product";
+        return "manager_template/manager_product";
     }
 
-    @GetMapping(value = {"/admin/product/add"})
+    @GetMapping(value = {"/manager/product/add"})
     public String addProductPage(Model model) {
         List<Category> categories = categoryService.getAllCategory();
         List<Brand> brands = brandService.getAllBrand();
@@ -57,15 +57,15 @@ public class ProductController {
         model.addAttribute("brands", brands);
         model.addAttribute("colors", colors);
         model.addAttribute("product", product);
-        return "admin_template/admin_add-products";
+        return "manager_template/manager_add-products";
     }
 
-    @PostMapping(value = {"/admin/product/add"})
+    @PostMapping(value = {"/manager/product/add"})
     public String addProduct(@ModelAttribute("product") Product product,
                              @RequestParam("image") MultipartFile image) {
 
 
-        if(image.getOriginalFilename() == null) return "redirect: /admin/product/add";
+        if(image.getOriginalFilename() == null) return "redirect: /manager/product/add";
 
         String sourceDirectory = "src/main/resources/static";
         String uploadDirectory = "/image";
@@ -84,7 +84,7 @@ public class ProductController {
 
         String[] nameList = image.getOriginalFilename().split("\\.");
 
-        if (nameList.length < 2) return "redirect:/admin/product/add";
+        if (nameList.length < 2) return "redirect:/manager/product/add";
 
         String fileExtension = nameList[nameList.length - 1];
 
@@ -105,10 +105,10 @@ public class ProductController {
         product.setPicture(fileName);
         productService.addProduct(product);
 
-        return "redirect:/admin/product";
+        return "redirect:/manager/product";
     }
 
-    @GetMapping(value = "/admin/product/edit/{id}")
+    @GetMapping(value = "/manager/product/edit/{id}")
     public String getEditProductPage(@PathVariable("id") Long id, Model model) {
 
         Product product = productService.getProductById(id);
@@ -123,34 +123,34 @@ public class ProductController {
         model.addAttribute("colors", colors);
         model.addAttribute("product", product);
 
-        return "admin_template/admin_edit-product";
+        return "manager_template/manager_edit-product";
     }
 
 
-    @PostMapping(value = "/admin/product/edit/{id}")
+    @PostMapping(value = "/manager/product/edit/{id}")
     public String editProductProcess(@ModelAttribute("product") Product updatedProduct,
                                      @RequestParam("image") String image) {
         updatedProduct.setPicture(image);
         productService.updateProduct(updatedProduct);
 
-        return "redirect:/admin/product";
+        return "redirect:/manager/product";
 
     }
 
-    @GetMapping("/admin/product/delete/{id}")
+    @GetMapping("/manager/product/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
 
         productService.removeById(id);
 
-        return "redirect:/admin/product";
+        return "redirect:/manager/product";
     }
 
-    @GetMapping("/admin/product/detail/{id}")
+    @GetMapping("/manager/product/detail/{id}")
     public String getProductDetailPage(@PathVariable("id") Long id, Model model){
 
         Product product = productService.getProductById(id);
 
-        if (product == null) return "redirect:/admin/product";
+        if (product == null) return "redirect:/manager/product";
 
         ProductDTO productDTO = new ProductDTO();
 
@@ -158,7 +158,7 @@ public class ProductController {
 
         model.addAttribute("product", productDTO);
 
-        return "admin_template/admin_product-details";
+        return "manager_template/manager_product-details";
     }
 
 
