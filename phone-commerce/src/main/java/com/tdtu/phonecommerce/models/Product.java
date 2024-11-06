@@ -36,6 +36,9 @@ public class Product implements Serializable {
     @Column(length = 1000)
     private String description;
 
+    private int quantity;
+
+
     public String getBrandName() {
         if (brand != null) {
             return brand.getName();
@@ -43,9 +46,10 @@ public class Product implements Serializable {
             return "No brand";
         }
     }
+
     @Override
-    public String toString(){
-        return "id: "+id+", name: "+name+", price: "+price+", image: "+picture;
+    public String toString() {
+        return "id: " + id + ", name: " + name + ", price: " + price + ", image: " + picture + ", quantity: " + quantity;
     }
 
 }
