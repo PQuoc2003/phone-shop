@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PQShop Cart</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" th:href="@{/css/HomePage.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" th:href="@{/Cart_fonts/icomoon/style.css}">
+    <link rel="stylesheet" th:href="@{/css/cart/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/cart/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/cart/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/cart/style.css}">
+
+</head>
+
+<body>
+    <!-- header section starts  -->
+
+    <header class="header">
+        <a href="#" class="logo"> <i class="fas fa-shopping-cart"></i>PQShop </a>
+        <nav class="navbar">
+            <a href="/homepage">Trang Chủ</a>
+            <a href="/home">Sản Phẩm</a>
+            <a th:if="${hasAdminRole}" href="/admin">Admin</a>
+            <a href="#blogs">Blogs</a>
+            <a href="/logout">Đăng xuất</a>
+        </nav>
+
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="#" class="fas fa-shopping-cart"></a>
+            <a href="#" class="fas fa-heart"></a>
+        </div>
+
+<!--        <form action="" class="search-form" onkeydown="searchBox()">-->
+<!--            <input type="text" name="search" id="search-box" placeholder="Search here... ">-->
+<!--            <label for class="fas fa-search"></label>-->
+<!--        </form>-->
+
+
+    </header>
+
+    <div class="bg-light py-3" style="margin-top: 80px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0"><a href="/homepage">Trang Chủ</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Giỏ Hàng</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row mb-5">
+                <form class="col-md-12" method="post">
+                    <div class="site-blocks-table">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="product-thumbnail">Tên</th>
+                                <th class="product-name">Sản Phẩm</th>
+                                <th class="product-price">Giá Tiền</th>
+                                <th class="product-quantity">Số Lượng</th>
+                                <th class="product-total">Thành Tiền</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-primary btn-sm btn-block"><a href="/homepage">Tiếp Tục Mua Sắm</a></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="text-black h4" for="coupon">Voucher của Bạn</label>
+                            <p>Vui lòng điền vào đây</p>
+                        </div>
+                        <div class="col-md-8 mb-3 mb-md-0">
+                            <input type="text" class="form-control py-3" id="coupon" placeholder="Mã Voucher">
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary btn-sm">Xác nhận mã voucher</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 pl-5" id="cartSummary">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer section starts  -->
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>Thông Tin Về Chúng Tôi</h3>
+                <img src="/homepage_img/blogs/footer.jpg" alt="" style="height: 300px;">
+            </div>
+
+            <div class="box">
+                <h3>Danh Mục</h3>
+                <a href="#"> <i class="fas fa-arrow-right"></i> Đồ Nam </a>
+                <a href="#"> <i class="fas fa-arrow-right"></i> Nữ </a>
+                <a href="#"> <i class="fas fa-arrow-right"></i> Trẻ Em </a>
+                <a href="#"> <i class="fas fa-arrow-right"></i> Sản Phẩm Bán Chạy </a>
+                <a href="#"> <i class="fas fa-arrow-right"></i> Sản Phẩm Mới</a>
+            </div>
+
+            <div class="box">
+                <h3>Truy Cập</h3>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Trang Chủ</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Sản Phẩm </a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Review</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Liên Hệ</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Blogs</a>
+            </div>
+
+            <div class="box">
+                <h3>Truy Cập Nhanh</h3>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Đơn Hàng Của Bạn</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Tài Khoản Của Bạn</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Bán Ngay Bây Giờ</a>
+            </div>
+
+        </div>
+        <div class="share">
+            <a href="" class="fab fa-facebook-f"></a>
+            <a href="" class="fab fa-twitter"></a>
+            <a href="" class="fab fa-pinterest"></a>
+            <a href="" class="fab fa-linkedin"></a>
+            <a href="" class="fab fa-instagram"></a>
+        </div>
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- custom js file link -->
+    <script th:inline="javascript">
+        let userId = /*[[${userId}]]*/ null;
+    </script>
+    <script th:src="@{/javascript/cart.js}"></script>
+    <script th:src="@{/javascript/cart/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/javascript/cart/jquery-ui.js}"></script>
+    <script th:src="@{/javascript/cart/popper.min.js}"></script>
+    <script th:src="@{/javascript/cart/bootstrap.min.js}"></script>
+    <script th:src="@{/javascript/cart/owl.carousel.min.js}"></script>
+    <script th:src="@{/javascript/cart/jquery.magnific-popup.min.js}"></script>
+    <script th:src="@{/javascript/cart/aos.js}"></script>
+    <script th:src="@{/javascript/cart/main.js}"></script>
+
+</body>
+
+</html>
