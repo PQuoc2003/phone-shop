@@ -15,10 +15,10 @@ public class HomeController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 
-        boolean hasAdminRole = authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLES_ADMIN"));
+        boolean hasManagerRole = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLES_MANAGER"));
 
-        model.addAttribute("hasAdminRole", hasAdminRole);
+        model.addAttribute("hasManagerRole", hasManagerRole);
 
 
         return "homepage";
@@ -29,9 +29,9 @@ public class HomeController {
         return "403";
     }
 
-    @GetMapping(value = "/admin")
+    @GetMapping(value = "/manager")
     public String adminHome() {
-        return "admin_template/admin_home";
+        return "manager_template/manager_home";
     }
 
 

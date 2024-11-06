@@ -14,7 +14,7 @@
 
   <meta name="theme-color" content="#712cf9">
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" th:href="@{/css/Admin.css}">
+  <link rel="stylesheet" th:href="@{/css/manager.css}">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
         style="min-height: 100vh;">
         <ul class="nav nav-pills flex-column mb-auto list-item">
 
-          <a href="/admin"
+          <a href="/manager"
             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi me-2" width="40" height="32"></svg>
             <span class="fs-4"><i class="fas fa-shopping-cart"></i>PQShop</span>
@@ -34,44 +34,44 @@
 
           <hr>
           <li class="nav-item">
-            <a href="/admin" class="nav-link active invidual-item" aria-current="page">
-              <img th:src="@{/admin_logo/house-door.svg}" alt="">
+            <a href="/manager" class="nav-link active invidual-item" aria-current="page">
+              <img th:src="@{manager_logo}" alt="">
               Trang Chủ
             </a>
           </li>
 
           <li class="nav-item">
-          <a href="/admin/product" class="nav-link link-body-emphasis invidual-item">
+          <a href="/manager/product" class="nav-link link-body-emphasis invidual-item">
 
-            <img th:src="@{/admin_logo/box2.svg}" alt="">
+            <img th:src="@{manager_logo}" alt="">
               Sản Phẩm
             </a>
           </li>
 
           <li class="nav-item">
-          <a href="/admin/category" class="nav-link link-body-emphasis invidual-item">
-            <img th:src="@{/admin_logo/grid-3x3.svg}" alt="">
+          <a href="/manager/category" class="nav-link link-body-emphasis invidual-item">
+            <img th:src="@{manager_logo}" alt="">
               Danh Mục
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/admin/color" class="nav-link link-body-emphasis invidual-item">
-              <img th:src="@{/admin_logo/paint-bucket.svg}" alt="">
+            <a href="/manager/color" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{manager_logo}" alt="">
               Màu Sắc
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/admin/brand" class="nav-link link-body-emphasis invidual-item">
-              <img th:src="@{/admin_logo/slack.svg}" alt="">
+            <a href="/manager/brand" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{manager_logo}" alt="">
               Thương Hiệu
             </a>
           </li>
 
           <li class="nav-item">
-          <a href="/admin/order" class="nav-link link-body-emphasis invidual-item">
-            <img th:src="@{/admin_logo/bag-dash.svg}" alt="">
+          <a href="/manager/order" class="nav-link link-body-emphasis invidual-item">
+            <img th:src="@{manager_logo}" alt="">
               Quản Lý Đơn Hàng
             </a>
           </li>
@@ -93,9 +93,9 @@
           <div class="col">
             <div class="d-flex justify-content-center align-items-center">
               <div style="padding-top :15px; padding-bottom: 5px; ">
-                <button type="button" class="btn btn-danger"><img th:src="@{/admin_logo/github.svg}" alt=""></button>
-                <button type="button" class="btn btn-outline-secondary"><img th:src="@{/admin_logo/gear.svg}" alt=""></button>
-                <button type="button" class="btn btn-outline-secondary"><img th:src="@{/admin_logo/person-lock.svg}" alt=""></button>
+                <button type="button" class="btn btn-danger"><img th:src="@{manager_logo}" alt=""></button>
+                <button type="button" class="btn btn-outline-secondary"><img th:src="@{manager_logo}" alt=""></button>
+                <button type="button" class="btn btn-outline-secondary"><img th:src="@{manager_logo}" alt=""></button>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@
               <h1 class="fw-light">Trang Quản Trị Admin</h1>
               <p class="lead text-body-secondary">Chức Năng Quản Lý Sản Phẩn , Hóa Đơn Và Tạo Danh Mục</p>
               <p>
-                <a href="/admin/product" class="btn btn-outline-danger">Chuyển Tiếp Quan Sản Phẩm</a>
+                <a href="/manager/product" class="btn btn-outline-danger">Chuyển Tiếp Quan Sản Phẩm</a>
                 <a href="/home" class="btn btn-outline-secondary">Quay Về Lại Trang Người Dùng </a>
               </p>
             </div>

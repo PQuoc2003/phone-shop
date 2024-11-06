@@ -23,44 +23,44 @@ public class ColorsController {
         this.colorsService = colorsService;
     }
 
-    @GetMapping(value = {"/admin/color"})
+    @GetMapping(value = {"/manager/color"})
     public String Color_Admin(Model model) {
 
         List<Colors> colors = colorsService.getAllColor();
 
         model.addAttribute("colors", colors);
-        return "admin_template/admin_colors";
+        return "manager_template/manager_colors";
     }
 
-    @GetMapping(value = {"/admin/color/add"})
+    @GetMapping(value = {"/manager/color/add"})
     public String addColors(Model model) {
         model.addAttribute("colors", new Colors());
-        return "admin_template/admin_add-colors"; // Đặt tên template hiển thị form thêm thương hiệu
+        return "manager_template/manager_add-colors"; // Đặt tên template hiển thị form thêm thương hiệu
     }
 
-    @PostMapping(value = {"/admin/color/add"})
+    @PostMapping(value = {"/manager/color/add"})
     public String addColorsProcess(@ModelAttribute("colors") Colors colors) {
         colorsService.addColors(colors);
-        return "redirect:/admin/color";
+        return "redirect:/manager/color";
     }
 
-    @GetMapping("/admin/color/edit/{id}")
+    @GetMapping("/manager/color/edit/{id}")
     public String editColorPage(@PathVariable("id") Long id, Model model) {
         Colors colors = colorsService.getColorById(id);
         model.addAttribute("colors", colors);
-        return "admin_template/admin_edit-colors";
+        return "manager_template/manager_edit-colors";
     }
 
-    @PostMapping("/admin/color/edit/{id}")
+    @PostMapping("/manager/color/edit/{id}")
     public String editColorProcess(@ModelAttribute("colors") Colors updateColors) {
         colorsService.updateColors(updateColors);
-        return "redirect:/admin/color";
+        return "redirect:/manager/color";
     }
 
-    @GetMapping("/admin/color/delete/{id}")
+    @GetMapping("/manager/color/delete/{id}")
     public String deleteColor(@PathVariable Long id) {
         colorsService.deleteColors(id);
-        return "redirect:/admin/color";
+        return "redirect:/manager/color";
     }
 
 

@@ -32,7 +32,7 @@ public class OrderController {
     }
 
 
-    @GetMapping("/admin/orders")
+    @GetMapping("/manager/orders")
     public String getAdminOrderPage(Model model) {
 
         List<Orders> orders = ordersService.getAllOrder();
@@ -47,21 +47,21 @@ public class OrderController {
 
         model.addAttribute("orders", ordersDTOS);
 
-        return "admin_template/admin_orders";
+        return "manager_template/manager_orders";
 
 
     }
 
-    @GetMapping("/admin/orders/delete/{id}")
+    @GetMapping("/manager/orders/delete/{id}")
     public String deleteOrder(@PathVariable Long id) {
         ordersService.deleteById(id);
-        return "redirect:/admin/orders";
+        return "redirect:/manager/orders";
     }
 
-    @GetMapping("/admin/orders/edit/{id}")
+    @GetMapping("/manager/orders/edit/{id}")
     public String updateStatus(@PathVariable Long id) {
         ordersService.updateStatus(id);
-        return "redirect:/admin/orders";
+        return "redirect:/manager/orders";
     }
 
     @GetMapping(value = "/orders-page")

@@ -59,20 +59,20 @@ public class SecurityConfig {
                                 .requestMatchers("/register").permitAll()
                                 .requestMatchers("/forgot-password").permitAll()
                                 .requestMatchers("/css/**", "/javascript/**", "/image/**").permitAll()
-                                .requestMatchers("/admin/**").hasAuthority(String.valueOf(Roles.ROLES_ADMIN))
+                                .requestMatchers("/manager/**").hasAuthority(String.valueOf(Roles.ROLES_MANAGER))
                                 .anyRequest().authenticated()
                 )
                 .formLogin(login ->
                         login.loginPage("/login")
                                 .loginProcessingUrl("/process-login")
                                 .defaultSuccessUrl("/home", true)
-                                .successHandler((request, response, authentication) -> {
-                                    if (authentication.getName().equals("admin_template")) {
-                                        response.sendRedirect("/admin_template");
-                                    } else {
-                                        response.sendRedirect("/home");
-                                    }
-                                })
+//                                .successHandler((request, response, authentication) -> {
+//                                    if (authentication.getName().equals("manager_template")) {
+//                                        response.sendRedirect("/manager_template");
+//                                    } else {
+//                                        response.sendRedirect("/home");
+//                                    }
+//                                })
                                 .permitAll()
                 )
                 .logout(logout ->
