@@ -26,6 +26,8 @@ public class ProductDTO {
 
     private String category;
 
+    private int quantity;
+
 
     public void convertToDTO(Product product){
 
@@ -37,6 +39,7 @@ public class ProductDTO {
         this.category = product.getCategory() != null ? product.getCategory().getName(): "N/A";
         this.picture = product.getPicture();
         this.price = product.getPrice();
+        this.quantity = product.getQuantity();
     }
 
 
