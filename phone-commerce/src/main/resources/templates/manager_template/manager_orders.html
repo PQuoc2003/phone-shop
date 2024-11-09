@@ -24,51 +24,59 @@
 
       <!-- Side Bar ____________________________________ -->
       <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary col-lg-2" id="sidebar"
-        style="min-height: 100vh;">
+           style="min-height: 100vh;">
         <ul class="nav nav-pills flex-column mb-auto list-item">
-          <a href="/manager"
-            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+
+          <a href="/admin"
+             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi me-2" width="40" height="32"></svg>
             <span class="fs-4"><i class="fas fa-shopping-cart"></i>PQShop</span>
           </a>
+
           <hr>
           <li class="nav-item">
-            <a href="/manager" class="nav-link active invidual-item" aria-current="page">
+            <a href="/admin" class="nav-link active invidual-item" aria-current="page">
               <img th:src="@{/manager_logo/house-door.svg}" alt="">
               Trang Chủ
             </a>
           </li>
-          <li class="nav-item">
-          <a href="/manager/Product" class="nav-link link-body-emphasis invidual-item">
 
-            <img th:src="@{/manager_logo/box2.svg}" alt="">
+          <li class="nav-item">
+            <a href="/admin/product" class="nav-link link-body-emphasis invidual-item">
+
+              <img th:src="@{/manager_logo/box2.svg}" alt="">
               Sản Phẩm
             </a>
           </li>
+
           <li class="nav-item">
-          <a href="/manager/Category" class="nav-link link-body-emphasis invidual-item">
-            <img th:src="@{/manager_logo/grid-3x3.svg}" alt="">
+            <a href="/admin/category" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/grid-3x3.svg}" alt="">
               Danh Mục
             </a>
           </li>
+
           <li class="nav-item">
-            <a href="/manager/Color" class="nav-link link-body-emphasis invidual-item">
+            <a href="/admin/color" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/paint-bucket.svg}" alt="">
               Màu Sắc
             </a>
           </li>
+
           <li class="nav-item">
-            <a href="/manager/Brand" class="nav-link link-body-emphasis invidual-item">
-              <img th:src="@{manager_logo}" alt="">
+            <a href="/admin/brand" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/slack.svg}" alt="">
               Thương Hiệu
             </a>
           </li>
+
           <li class="nav-item">
-          <a href="/manager/Order" class="nav-link link-body-emphasis invidual-item">
-            <img th:src="@{manager_logo}" alt="">
+            <a href="/admin/order" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
               Quản Lý Đơn Hàng
             </a>
           </li>
+
         </ul>
       </div>
       <!-- ____________________________________________________________________________________________-->
@@ -85,9 +93,9 @@
           <div class="col">
             <div class="d-flex justify-content-center align-items-center">
               <div style="padding-top :15px; padding-bottom: 5px; ">
-                <button type="button" class="btn btn-danger"><img th:src="@{manager_logo}" alt=""><a href=""></a></button>
-                <button type="button" class="btn btn-outline-secondary"><a href=""><img th:src="@{manager_logo}" alt=""></a></button>
-                <button type="button" class="btn btn-outline-secondary"><img th:src="@{manager_logo}" alt=""></button>
+                <button type="button" class="btn btn-danger"><img th:src="@{/manager_logo/github.svg}" alt=""><a href=""></a></button>
+                <button type="button" class="btn btn-outline-secondary"><a href=""><img th:src="@{/manager_logo/gear.svg}" alt=""></a></button>
+                <button type="button" class="btn btn-outline-secondary"><img th:src="@{/manager_logo/person-lock.svg}" alt=""></button>
               </div>
             </div>
           </div>

@@ -72,7 +72,7 @@
                     <!--Quantity-->
                     <div class="form-group">
                         <label>Quantity</label>
-                        <input class="form-control" name="quantity" required type="text">
+                        <input class="form-control" name="quantity" id="quantity" required type="text">
                         <div id="errorMessage" class="error"></div>
                     </div>
 
@@ -85,6 +85,6 @@
         </div>
     </div>
 </div>
-<script src="/javascript/manager/add_product.js"></script>
+<script th:src="@{/javascript/manager/add_product.js}"></script>
 </body>
 </html>
