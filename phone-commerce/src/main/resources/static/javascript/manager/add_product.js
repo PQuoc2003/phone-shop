@@ -1,4 +1,4 @@
-document.getElementById('add-product').addEventListener('submit', function(event) {
+function eventHandler(event) {
     event.preventDefault(); // Prevent form submission
     const quantityInput = document.getElementById('quantity');
     const errorMessage = document.getElementById('errorMessage');
@@ -14,4 +14,12 @@ document.getElementById('add-product').addEventListener('submit', function(event
     } else {
         this.submit();
     }
-});
+}
+
+document.getElementById('add-product').addEventListener('submit', eventHandler);
+
+document.getElementById('edit-product').addEventListener('submit', eventHandler);
+
+
+
+

@@ -59,6 +59,13 @@ public class OrderController {
 
     @GetMapping("/manager/orders/edit/{id}")
     public String updateStatus(@PathVariable Long id) {
+
+        Orders orders = ordersService.getOrdersById(id);
+
+        if(orders == null) return "redirect:/manager/orders";
+
+
+
         ordersService.updateStatus(id);
         return "redirect:/manager/orders";
     }

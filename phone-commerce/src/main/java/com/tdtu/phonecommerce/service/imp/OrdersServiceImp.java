@@ -36,8 +36,13 @@ public class OrdersServiceImp implements OrdersService {
     @Override
     public void updateStatus(Long id) {
         Orders order = ordersRepository.findById(id).get();
-        order.setOrder_status("Đang Giao Hàng");
+        order.setOrder_status("Đã Giao Hàng");
         ordersRepository.save(order);
 
+    }
+
+    @Override
+    public Orders getOrdersById(Long id) {
+        return ordersRepository.findById(id).orElse(null);
     }
 }

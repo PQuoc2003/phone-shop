@@ -1,6 +1,7 @@
 package com.tdtu.phonecommerce.service.imp;
 
 import com.tdtu.phonecommerce.models.OrderItems;
+import com.tdtu.phonecommerce.models.Product;
 import com.tdtu.phonecommerce.repository.OrderItemsRepository;
 import com.tdtu.phonecommerce.service.OrderItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,5 @@ public class OrderItemsServiceImp implements OrderItemsService {
     public List<OrderItems> getAllOrderItems() {
         return orderItemsRepository.findAll();
     }
+
 }

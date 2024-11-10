@@ -16,5 +16,7 @@ public interface OrdersService {
 
     void updateStatus(Long id);
 
+    Orders getOrdersById(Long id);
+
 
 }
