@@ -27,7 +27,12 @@ public interface ProductService {
 
     List<Product> search(String category, String name,String brand,int minPrice,int maxPrice,String color);
 
+    void updateQuantity(Long id, int quantity);
+
+
     ProductDTO convertToDTO(Product product);
+
+
 
 
 

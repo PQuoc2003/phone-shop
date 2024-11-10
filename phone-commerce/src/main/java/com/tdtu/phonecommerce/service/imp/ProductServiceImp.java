@@ -61,6 +61,17 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
+    public void updateQuantity(Long id, int quantity) {
+        Product product = productRepository.findById(id).orElse(null);
+
+        if (product == null) return;
+
+        product.setQuantity(quantity);
+
+        productRepository.save(product);
+    }
+
+    @Override
     public ProductDTO convertToDTO(Product product) {
         ProductDTO dto = new ProductDTO();
         dto.setPicture(product.getPicture());
