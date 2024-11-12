@@ -228,6 +228,30 @@ function viewProductDetail(id) {
 document.getElementById("showCart").style.display = "none";
 //Xu li gio hang
 let gioHang = [];
+
+function fetchCart() {
+  fetch('/api/cart/get')
+      .then(response => response.json())
+      .then(data => {
+        gioHang = data.map(item => ({
+          id: item.id,
+          picture: item.picture,
+          name: item.name,
+          price: item.price,
+          detailProduct: item.detailProduct,
+          quantity: item.quantity,
+          brand: item.brand,
+          color: item.color,
+        }));
+
+        // Save to sessionStorage if needed
+        sessionStorage.setItem("gioHang", JSON.stringify(gioHang));
+      })
+      .catch(error => console.error('Error fetching cart items:', error));
+}
+
+fetchCart();
+
 function addCart(product, productId) {
   const productDiv = product.closest(".box");
   const hinhSp = (productDiv.querySelector(".image img").src + "").split("/").pop();
@@ -310,7 +334,6 @@ function showMyCart() {
 showMyCart();
 // Hàm chuyển hướng đến trang giỏ hàng
 function redirectToCart() {
-  // Chuyển đến trang giỏ hàng (ví dụ: "cart.html")
   window.location.href = "/cart";
 }
 function showCart() {

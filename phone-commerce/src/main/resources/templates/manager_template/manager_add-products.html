@@ -22,8 +22,8 @@
             <div class="table-title">
                 <h2>Add Product</h2>
             </div>
-            <form action="#" enctype="multipart/form-data" method="post" th:action="@{/manager/product/add}"
-                  th:object="${product}">
+            <form enctype="multipart/form-data" method="post" th:action="@{/manager/product/add}"
+                  th:object="${product}" id="add-product">
                 <div class="modal-body">
                     <!--Name-->
                     <div class="form-group">
@@ -68,6 +68,14 @@
                             </option>
                         </select>
                     </div>
+
+                    <!--Quantity-->
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input class="form-control" name="quantity" id="quantity" required type="text">
+                        <div id="errorMessage" class="error"></div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <a th:href="@{/manager/product}"><input class="btn btn-default" data-dismiss="modal" type="button"  value="Cancel"></a>
@@ -77,5 +85,6 @@
         </div>
     </div>
 </div>
+<script th:src="@{/javascript/manager/add_product.js}"></script>
 </body>
 </html>

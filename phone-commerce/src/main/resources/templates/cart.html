@@ -34,12 +34,12 @@
             <a href="/logout">Đăng xuất</a>
         </nav>
 
-        <div class="icons">
-            <div id="menu-btn" class="fas fa-bars"></div>
-            <div id="search-btn" class="fas fa-search"></div>
-            <a href="#" class="fas fa-shopping-cart"></a>
-            <a href="#" class="fas fa-heart"></a>
-        </div>
+<!--        <div class="icons">-->
+<!--            <div id="menu-btn" class="fas fa-bars"></div>-->
+<!--            <div id="search-btn" class="fas fa-search"></div>-->
+<!--            <a href="#" class="fas fa-shopping-cart"></a>-->
+<!--            <a href="#" class="fas fa-heart"></a>-->
+<!--        </div>-->
 
 <!--        <form action="" class="search-form" onkeydown="searchBox()">-->
 <!--            <input type="text" name="search" id="search-box" placeholder="Search here... ">-->
@@ -85,20 +85,15 @@
                         <div class="col-md-6">
                             <button class="btn btn-outline-primary btn-sm btn-block"><a href="/homepage">Tiếp Tục Mua Sắm</a></button>
                         </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary btn-sm" onclick="deleteCart()">Xóa giỏ hàng</button>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <label class="text-black h4" for="coupon">Voucher của Bạn</label>
-                            <p>Vui lòng điền vào đây</p>
-                        </div>
-                        <div class="col-md-8 mb-3 mb-md-0">
-                            <input type="text" class="form-control py-3" id="coupon" placeholder="Mã Voucher">
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn btn-primary btn-sm">Xác nhận mã voucher</button>
-                        </div>
+
                     </div>
                 </div>
+
                 <div class="col-md-6 pl-5" id="cartSummary">
                 </div>
             </div>

@@ -9,7 +9,7 @@
 
   <!-- Favicons -->
   <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
-<!--  <link rel="stylesheet" th:href="@{bootstrap/css/bootstrap-grid.css}">-->
+  <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap-grid.css}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <meta name="theme-color" content="#712cf9">
@@ -23,56 +23,63 @@
 
       <!-- Side Bar ____________________________________ -->
       <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary col-lg-2" id="sidebar"
-        style="min-height: 100vh;">
+           style="min-height: 100vh;">
         <ul class="nav nav-pills flex-column mb-auto list-item">
 
-          <a href="/manager"
-            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <a href="/admin"
+             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi me-2" width="40" height="32"></svg>
             <span class="fs-4"><i class="fas fa-shopping-cart"></i>PQShop</span>
           </a>
 
           <hr>
           <li class="nav-item">
-            <a href="/manager" class="nav-link active invidual-item" aria-current="page">
-              <img th:src="@{manager_logo}" alt="">
+            <a href="/admin" class="nav-link active invidual-item" aria-current="page">
+              <img th:src="@{/manager_logo/house-door.svg}" alt="">
               Trang Chủ
             </a>
           </li>
 
           <li class="nav-item">
-          <a href="/manager/product" class="nav-link link-body-emphasis invidual-item">
+            <a href="/admin/product" class="nav-link link-body-emphasis invidual-item">
 
-            <img th:src="@{manager_logo}" alt="">
+              <img th:src="@{/manager_logo/box2.svg}" alt="">
               Sản Phẩm
             </a>
           </li>
 
           <li class="nav-item">
-          <a href="/manager/category" class="nav-link link-body-emphasis invidual-item">
-            <img th:src="@{manager_logo}" alt="">
+            <a href="/admin/category" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/grid-3x3.svg}" alt="">
               Danh Mục
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/manager/color" class="nav-link link-body-emphasis invidual-item">
-              <img th:src="@{manager_logo}" alt="">
+            <a href="/admin/color" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/paint-bucket.svg}" alt="">
               Màu Sắc
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/manager/brand" class="nav-link link-body-emphasis invidual-item">
-              <img th:src="@{manager_logo}" alt="">
+            <a href="/admin/brand" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/slack.svg}" alt="">
               Thương Hiệu
             </a>
           </li>
 
           <li class="nav-item">
-          <a href="/manager/order" class="nav-link link-body-emphasis invidual-item">
-            <img th:src="@{manager_logo}" alt="">
+            <a href="/admin/order" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
               Quản Lý Đơn Hàng
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/admin/employee" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
+              Nhân viên
             </a>
           </li>
 
@@ -93,9 +100,9 @@
           <div class="col">
             <div class="d-flex justify-content-center align-items-center">
               <div style="padding-top :15px; padding-bottom: 5px; ">
-                <button type="button" class="btn btn-danger"><img th:src="@{manager_logo}" alt=""></button>
-                <button type="button" class="btn btn-outline-secondary"><img th:src="@{manager_logo}" alt=""></button>
-                <button type="button" class="btn btn-outline-secondary"><img th:src="@{manager_logo}" alt=""></button>
+                <button type="button" class="btn btn-danger"><img th:src="@{/manager_logo/github.svg}" alt=""><a href=""></a></button>
+                <button type="button" class="btn btn-outline-secondary"><a href=""><img th:src="@{/manager_logo/gear.svg}" alt=""></a></button>
+                <button type="button" class="btn btn-outline-secondary"><img th:src="@{/manager_logo/person-lock.svg}" alt=""></button>
               </div>
             </div>
           </div>
@@ -173,8 +180,8 @@
       <!-- ______________________________________________________________________________-->
     </div>
   </div>
-<!--  <script th:src="@{bootstrap/js/bootstrap.js}"></script>-->
-<!--  <script th:src="@{bootstrap/js/bootstrap.bundle.js}"></script>-->
+  <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.bundle.js}"></script>
   <script th:src="@{/javascript/Sidebar_Admin.js}"></script>
 </body>
 
