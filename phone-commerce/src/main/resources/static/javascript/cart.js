@@ -143,6 +143,20 @@ function updateCartSummary() {
 // Gọi hàm cập nhật khi trang tải
 updateCartSummary();
 
+
+//---------delete cart--------------
+
+function deleteCart(){
+    fetch('/api/cart/delete')
+        .then(response => response.text())
+        .then(data => {
+            sessionStorage.clear();
+            location.reload();
+
+        })
+}
+
+
 // ________________________________saveCartToDatBase___________________________________________________
 function saveCartToDatabase() {
   //Gửi yêu cầu POST đến API để lưu giỏ hàng vào CSDL

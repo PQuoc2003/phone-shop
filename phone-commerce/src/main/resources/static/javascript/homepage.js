@@ -334,7 +334,6 @@ function showMyCart() {
 showMyCart();
 // Hàm chuyển hướng đến trang giỏ hàng
 function redirectToCart() {
-  // Chuyển đến trang giỏ hàng (ví dụ: "cart.html")
   window.location.href = "/cart";
 }
 function showCart() {

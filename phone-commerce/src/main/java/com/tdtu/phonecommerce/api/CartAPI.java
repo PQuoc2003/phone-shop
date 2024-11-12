@@ -2,7 +2,6 @@ package com.tdtu.phonecommerce.api;
 
 import com.tdtu.phonecommerce.dto.CartItemsDTO;
 import com.tdtu.phonecommerce.dto.OrdersDTO;
-import com.tdtu.phonecommerce.dto.ProductDTO;
 import com.tdtu.phonecommerce.models.*;
 import com.tdtu.phonecommerce.service.*;
 import jakarta.servlet.http.HttpSession;
@@ -98,7 +97,7 @@ public class CartAPI {
 
             cartItemsService.save(cartItems);
 
-            total += cartItemsDTO.getQuantity() * cartItemsDTO.getPrice();
+            total += (int) (cartItemsDTO.getQuantity() * cartItemsDTO.getPrice());
             quantity += cartItemsDTO.getQuantity();
 
         }
@@ -139,31 +138,39 @@ public class CartAPI {
 
     }
 
-    @GetMapping("/api/cart/get")
-    ResponseEntity<List<CartItemsDTO>> getCurrentCart() {
-
-        List<CartItemsDTO> cartItemsDTOList = new ArrayList<>();
+    private Cart getCartOfCurrentUser(String status){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String username = authentication.getName();
 
-        // get current Order (Chờ thanh toán)
-
-        String status = "Chờ Thanh toán";
-
-
         List<Orders> ordersList = ordersService.getByUsernameAndStatus(username, status);
 
-
-        if (ordersList.isEmpty()) return ResponseEntity.ofNullable(cartItemsDTOList);
+        if (ordersList.isEmpty()) return null;
 
         Orders orders = ordersList.get(0);
 
-        Long id = orders.getCart().getId();
+        return orders.getCart();
+
+
+    }
+
+    @GetMapping("/api/cart/get")
+    ResponseEntity<List<CartItemsDTO>> getCurrentCart() {
+
+        List<CartItemsDTO> cartItemsDTOList = new ArrayList<>();
+
+        String status = "Chờ Thanh toán";
+
+        Cart cart = this.getCartOfCurrentUser(status);
+
+
+        if (cart == null) return ResponseEntity.ofNullable(cartItemsDTOList);
+
+        Long id = cart.getId();
+
 
         List<CartItems> cartItemsList = cartItemsService.getCartItemByCartId(id);
-
 
         for (CartItems cartItems : cartItemsList) {
 
@@ -175,6 +182,24 @@ public class CartAPI {
         }
 
         return ResponseEntity.ok(cartItemsDTOList);
+    }
+
+    @GetMapping("/api/cart/delete")
+    void deleteCurrentCart() {
+
+        String status = "Chờ Thanh toán";
+        Cart cart = this.getCartOfCurrentUser(status);
+        if(cart == null) return;
+
+        Long id = cart.getId();
+
+        cartItemsService.deleteByCartId(id);
+
+        ordersService.deleteByCartId(id);
+        cartService.deleteCartById(id);
+
+
+
     }
 
 

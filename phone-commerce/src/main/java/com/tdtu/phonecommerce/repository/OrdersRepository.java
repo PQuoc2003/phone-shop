@@ -1,7 +1,9 @@
 package com.tdtu.phonecommerce.repository;
 
 import com.tdtu.phonecommerce.models.Orders;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +15,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
     @Query("SELECT ci FROM Orders ci WHERE ci.cart.id = :cartId")
     Orders findByCartId(Long cartId);
 
+    @Transactional
+    @Modifying
     @Query("DELETE FROM Orders ci WHERE ci.cart.id = :cartId")
     void deleteByCartId(Long cartId);
 
