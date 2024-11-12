@@ -24,7 +24,7 @@ public class Orders implements Serializable {
     private Long id;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User userOrder;
 
@@ -38,7 +38,7 @@ public class Orders implements Serializable {
     @CreationTimestamp
     private LocalDateTime createDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Cart cart;
 
 

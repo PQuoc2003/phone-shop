@@ -51,7 +51,7 @@ public class CartAPI {
      * @param session
      * This module receive request and save items to database
      */
-    @PostMapping("api/cart/save")
+    @PostMapping("/api/cart/save")
     public void saveCart(@RequestBody List<CartItemsDTO> cartItemDTO, HttpSession session) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -139,7 +139,7 @@ public class CartAPI {
 
     }
 
-    @GetMapping("api/cart/get")
+    @GetMapping("/api/cart/get")
     ResponseEntity<List<CartItemsDTO>> getCurrentCart() {
 
         List<CartItemsDTO> cartItemsDTOList = new ArrayList<>();
@@ -152,24 +152,27 @@ public class CartAPI {
 
         String status = "Chờ Thanh toán";
 
-        Orders orders = ordersService.getByUsernameAndStatus(username, status);
 
-        if (orders == null) return ResponseEntity.ok(cartItemsDTOList);
+        List<Orders> ordersList = ordersService.getByUsernameAndStatus(username, status);
+
+
+        if (ordersList.isEmpty()) return ResponseEntity.ofNullable(cartItemsDTOList);
+
+        Orders orders = ordersList.get(0);
 
         Long id = orders.getCart().getId();
 
         List<CartItems> cartItemsList = cartItemsService.getCartItemByCartId(id);
 
+
         for (CartItems cartItems : cartItemsList) {
 
-            CartItemsDTO cartItemsDTO = new CartItemsDTO();
-
-            cartItemsDTO.convertToDTO(cartItems);
+            CartItemsDTO cartItemsDTO = cartItemsService.convertToDTO(cartItems);
 
             cartItemsDTOList.add(cartItemsDTO);
 
-        }
 
+        }
 
         return ResponseEntity.ok(cartItemsDTOList);
     }

@@ -58,7 +58,7 @@ public class OrdersServiceImp implements OrdersService {
     }
 
     @Override
-    public Orders getByUsernameAndStatus(String username, String status) {
+    public List<Orders> getByUsernameAndStatus(String username, String status) {
         return ordersRepository.findByUserNameAndStatus(username, status);
     }
 }

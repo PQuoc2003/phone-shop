@@ -22,7 +22,7 @@ public interface OrdersService {
 
     void deleteByCartId(Long cartId);
 
-    Orders getByUsernameAndStatus(String username, String status);
+    List<Orders> getByUsernameAndStatus(String username, String status);
 
 
 }

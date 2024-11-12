@@ -19,5 +19,7 @@ public interface CartItemsService {
 
     List<CartItems> getCartItemByCartId(Long id);
 
+    CartItemsDTO convertToDTO(CartItems cartItems);
+
 
 }
