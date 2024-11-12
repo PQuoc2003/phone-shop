@@ -53,4 +53,5 @@ public class CartServiceImp implements CartService {
     public List<Cart> getCartsByUserId(Long userId) {
         return cartRepository.findByUserId(userId);
     }
+
 }

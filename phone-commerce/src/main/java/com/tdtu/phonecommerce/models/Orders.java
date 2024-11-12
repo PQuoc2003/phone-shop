@@ -38,6 +38,9 @@ public class Orders implements Serializable {
     @CreationTimestamp
     private LocalDateTime createDate;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Cart cart;
+
 
 
 }

@@ -21,6 +21,7 @@ public class OrdersDTO {
     private Long userID;
     private String email;
     private int quantity;
+    private Long cartId;
 
     public void convertToDTO(Orders order){
 
@@ -32,6 +33,7 @@ public class OrdersDTO {
         this.phoneNumber = order.getUserOrder() != null ? order.getUserOrder().getPhoneNumber() : "N/A";
         this.userID = order.getUserOrder() != null ? order.getUserOrder().getId() : -1L;
         this.email = order.getUserOrder() != null ? order.getUserOrder().getEmail() : "N/A";
+        this.cartId = order.getCart()!= null ? order.getCart().getId() : -1L;
     }
 
 }

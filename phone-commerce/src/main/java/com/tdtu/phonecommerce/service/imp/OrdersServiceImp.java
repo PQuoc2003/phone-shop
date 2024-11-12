@@ -35,7 +35,8 @@ public class OrdersServiceImp implements OrdersService {
 
     @Override
     public void updateStatus(Long id) {
-        Orders order = ordersRepository.findById(id).get();
+        Orders order = ordersRepository.findById(id).orElse(null);
+        if(order == null) return;
         order.setOrder_status("Đã Giao Hàng");
         ordersRepository.save(order);
 
@@ -44,5 +45,20 @@ public class OrdersServiceImp implements OrdersService {
     @Override
     public Orders getOrdersById(Long id) {
         return ordersRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Orders getByCartId(Long cartId) {
+        return ordersRepository.findByCartId(cartId);
+    }
+
+    @Override
+    public void deleteByCartId(Long cartId) {
+        ordersRepository.deleteByCartId(cartId);
+    }
+
+    @Override
+    public Orders getByUsernameAndStatus(String username, String status) {
+        return ordersRepository.findByUserNameAndStatus(username, status);
     }
 }

@@ -1,9 +1,12 @@
 package com.tdtu.phonecommerce.controller;
 
 import com.tdtu.phonecommerce.dto.OrdersDTO;
+import com.tdtu.phonecommerce.models.CartItems;
 import com.tdtu.phonecommerce.models.Orders;
-import com.tdtu.phonecommerce.models.User;
+import com.tdtu.phonecommerce.models.Product;
+import com.tdtu.phonecommerce.service.CartItemsService;
 import com.tdtu.phonecommerce.service.OrdersService;
+import com.tdtu.phonecommerce.service.ProductService;
 import com.tdtu.phonecommerce.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +24,25 @@ public class OrderController {
 
     private final OrdersService ordersService;
 
+    private final CartItemsService cartItemsService;
+
+    private final ProductService productService;
+
     private final UserService userService;
 
 
     @Autowired
-    public OrderController(OrdersService ordersService, UserService userService) {
+    public OrderController(
+            OrdersService ordersService,
+            UserService userService,
+            CartItemsService cartItemsService,
+            ProductService productService
+    ) {
         this.ordersService = ordersService;
         this.userService = userService;
+        this.cartItemsService = cartItemsService;
+        this.productService = productService;
     }
-
 
     @GetMapping("/manager/orders")
     public String getAdminOrderPage(Model model) {
@@ -48,7 +61,6 @@ public class OrderController {
 
         return "manager_template/manager_orders";
 
-
     }
 
     @GetMapping("/manager/orders/delete/{id}")
@@ -65,7 +77,6 @@ public class OrderController {
         if(orders == null) return "redirect:/manager/orders";
 
 
-
         ordersService.updateStatus(id);
         return "redirect:/manager/orders";
     }
@@ -76,18 +87,33 @@ public class OrderController {
             // Lấy orderDetails từ session
             OrdersDTO ordersDTO = (OrdersDTO) session.getAttribute("orderDetails");
 
+            Long ordersId = (Long) session.getAttribute("ordersId");
+
+            // Orders hiện tại của khách hàng có trạng thái chờ thanh toán
+            Orders orders = ordersService.getOrdersById(ordersId);
+
             // Đưa orderDetails vào model để sử dụng trong view
             model.addAttribute("orderDetails", ordersDTO);
 
-            Orders orders = new Orders();
-            User user = userService.findById(ordersDTO.getUserID());
-
-            if (user == null) return "redirect:/home";
-
-            orders.setUserOrder(user);
-            orders.setCreateDate(ordersDTO.getOrderCreated());
-            orders.setOrder_total(ordersDTO.getTotal());
+            // Update tình trạng order thành đã thanh toán - chưa giao hàng
             orders.setOrder_status("Chưa Giao Hàng");
+            ordersService.addOrder(orders);
+
+            // Giảm số lượng của sản phẩm đi 1
+            Long cartId = (Long) session.getAttribute("cartId");
+
+            List<CartItems> cartItems = cartItemsService.getCartItemByCartId(cartId);
+
+            for (CartItems cartItem: cartItems) {
+                Product product = cartItem.getProduct();
+                // Quantity còn lại = số lượng hiện tại - số lượng của cart
+                product.setQuantity(product.getQuantity() - cartItem.getQuantity());
+                productService.updateProduct(product);
+            }
+            // Xóa session cartId
+            // Set nó bằng null
+
+            session.setAttribute("cartId", null);
 
 
         }

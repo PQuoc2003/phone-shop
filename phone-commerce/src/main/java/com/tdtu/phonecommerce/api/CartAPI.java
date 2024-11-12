@@ -2,20 +2,21 @@ package com.tdtu.phonecommerce.api;
 
 import com.tdtu.phonecommerce.dto.CartItemsDTO;
 import com.tdtu.phonecommerce.dto.OrdersDTO;
-import com.tdtu.phonecommerce.models.Cart;
-import com.tdtu.phonecommerce.models.CartItems;
-import com.tdtu.phonecommerce.models.Orders;
-import com.tdtu.phonecommerce.models.User;
+import com.tdtu.phonecommerce.dto.ProductDTO;
+import com.tdtu.phonecommerce.models.*;
 import com.tdtu.phonecommerce.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -63,9 +64,23 @@ public class CartAPI {
 
         Cart cart = new Cart();
 
-        cart.setUser(user);
+        boolean existCart = false;
 
-        cartService.saveCart(cart);
+        // sau bước này sẽ có được cái cart
+        if (session.getAttribute("cartId") != null) {
+            Long id = (Long) session.getAttribute("cartId");
+            cart = cartService.getCartById(id);
+            existCart = true;
+
+            // xóa đi hết các cart items của cart đó.
+            // Sau bước này cart items null
+            cartItemsService.deleteByCartId(id);
+
+        } else {
+            cart.setUser(user);
+            cartService.saveCart(cart);
+        }
+
 
         int total = 0;
         int quantity = 0;
@@ -88,6 +103,7 @@ public class CartAPI {
 
         }
 
+        // have the total and quantity of cart
 
         OrdersDTO ordersDTO = new OrdersDTO();
 
@@ -99,17 +115,63 @@ public class CartAPI {
         ordersDTO.setAddress(user.getAddress());
         ordersDTO.setFullName(user.getName());
         ordersDTO.setPhoneNumber(user.getPhoneNumber());
-        session.setAttribute("orderDetails", ordersDTO);
+        ordersDTO.setCartId(cart.getId());
 
+
+        // Nếu cart đã tồn tại thì xóa cái order cũ đi
+        // Vì đây là hành động tạo 1 cái order mới
+        // Thì cái order cũ sẽ bị xóa đi, viết lại bằng cái order mới
+        if (existCart) {
+            ordersService.deleteByCartId(cart.getId());
+        }
 
         Orders orders = new Orders();
         orders.setUserOrder(user);
         orders.setCreateDate(ordersDTO.getOrderCreated());
         orders.setOrder_total(ordersDTO.getTotal());
-        orders.setOrder_status("Chưa Giao Hàng");
+        orders.setOrder_status("Chờ Thanh toán");
+        orders.setCart(cart);
         ordersService.addOrder(orders);
 
+        session.setAttribute("orderDetails", ordersDTO);
+        session.setAttribute("ordersId", orders.getId());
+        session.setAttribute("cartId", cart.getId());
 
+    }
+
+    @GetMapping("api/cart/get")
+    ResponseEntity<List<CartItemsDTO>> getCurrentCart() {
+
+        List<CartItemsDTO> cartItemsDTOList = new ArrayList<>();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getName();
+
+        // get current Order (Chờ thanh toán)
+
+        String status = "Chờ Thanh toán";
+
+        Orders orders = ordersService.getByUsernameAndStatus(username, status);
+
+        if (orders == null) return ResponseEntity.ok(cartItemsDTOList);
+
+        Long id = orders.getCart().getId();
+
+        List<CartItems> cartItemsList = cartItemsService.getCartItemByCartId(id);
+
+        for (CartItems cartItems : cartItemsList) {
+
+            CartItemsDTO cartItemsDTO = new CartItemsDTO();
+
+            cartItemsDTO.convertToDTO(cartItems);
+
+            cartItemsDTOList.add(cartItemsDTO);
+
+        }
+
+
+        return ResponseEntity.ok(cartItemsDTOList);
     }
 
 

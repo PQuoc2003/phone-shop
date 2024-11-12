@@ -228,6 +228,13 @@ function viewProductDetail(id) {
 document.getElementById("showCart").style.display = "none";
 //Xu li gio hang
 let gioHang = [];
+
+function fetchCart() {
+
+}
+
+
+
 function addCart(product, productId) {
   const productDiv = product.closest(".box");
   const hinhSp = (productDiv.querySelector(".image img").src + "").split("/").pop();

@@ -18,5 +18,11 @@ public interface OrdersService {
 
     Orders getOrdersById(Long id);
 
+    Orders getByCartId(Long cartId);
+
+    void deleteByCartId(Long cartId);
+
+    Orders getByUsernameAndStatus(String username, String status);
+
 
 }

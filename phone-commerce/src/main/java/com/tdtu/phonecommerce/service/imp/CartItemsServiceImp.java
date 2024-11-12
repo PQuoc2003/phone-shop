@@ -1,5 +1,6 @@
 package com.tdtu.phonecommerce.service.imp;
 
+import com.tdtu.phonecommerce.dto.CartItemsDTO;
 import com.tdtu.phonecommerce.models.CartItems;
 import com.tdtu.phonecommerce.repository.CartItemsRepository;
 import com.tdtu.phonecommerce.service.CartItemsService;
@@ -31,6 +32,11 @@ public class CartItemsServiceImp implements CartItemsService {
     }
 
     @Override
+    public void deleteByCartId(Long id) {
+        cartItemsRepository.deleteByCartId(id);
+    }
+
+    @Override
     public void save(CartItems cartItems) {
         cartItemsRepository.save(cartItems);
 
@@ -40,4 +46,5 @@ public class CartItemsServiceImp implements CartItemsService {
     public List<CartItems> getCartItemByCartId(Long id) {
         return cartItemsRepository.findByCartId(id);
     }
+
 }
