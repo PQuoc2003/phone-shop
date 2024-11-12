@@ -62,7 +62,7 @@ public class PasswordController {
         String newPassword = PasswordGenerator.generate(12);
 
 //        test password
-        newPassword = "phuquoc";
+//        newPassword = "phuquoc";
 
 
         User myUser = users.get(0);
