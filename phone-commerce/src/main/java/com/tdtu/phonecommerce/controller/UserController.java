@@ -7,6 +7,8 @@ import com.tdtu.phonecommerce.models.User;
 import com.tdtu.phonecommerce.service.EmailService;
 import com.tdtu.phonecommerce.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +30,36 @@ public class UserController {
 
     private final EmailService emailService;
 
+
+    @GetMapping("/manager/employee")
+    public String getEmployeePage(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String currUserName = authentication.getName();
+
+
+        List<User> userListManager = userService.findByRoles(Roles.ROLES_MANAGER);
+
+        userListManager.removeIf(currUser -> currUser.getUserName().equals(currUserName));
+
+        List<User> userListEmployee = userService.findByRoles(Roles.ROLES_EMPLOYEE);
+
+        userListManager.addAll(userListEmployee);
+
+        List<User> userListBlogger = userService.findByRoles(Roles.ROLES_BLOGGER);
+
+        userListManager.addAll(userListBlogger);
+
+        model.addAttribute("userList", userListManager);
+
+
+        return "/manager_template/manager_employee";
+    }
+
+
     @GetMapping("/manager/employee/add")
-    public String getAddUserPage(Model model){
+    public String getAddUserPage(Model model) {
         model.addAttribute("newUser", new User());
 
         List<Roles> roles = new ArrayList<>();
@@ -42,7 +72,7 @@ public class UserController {
         model.addAttribute("roles", roles);
 
 
-        return "manager_template/add_employee";
+        return "manager_template/manager_add-employee";
 
     }
 
@@ -96,7 +126,6 @@ public class UserController {
 
 
     }
-
 
 
 }

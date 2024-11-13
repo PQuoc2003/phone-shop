@@ -103,7 +103,7 @@
         </div>
         <hr>
         <div class="container">
-          <a href="/manager/brand/add" class="add-product-btn">Thêm Thương Hiệu</a>
+          <a href="/manager/employee/add" class="add-product-btn">Thêm Nhân Viên</a>
         </div>
         <div class="row" style="padding: 20px;">
           <div class="col-md-12">
@@ -114,18 +114,20 @@
                 <table class="table table-striped" id="table">
                   <thead >
                     <tr>
-                      <th>ID</th>
-                      <th>Tên Thương Hiệu</th>
+                      <th>Username</th>
+                      <th>Tên</th>
+                      <th>Roles</th>
                       <th>Hành Động</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:each="brand : ${brands}">
-                      <td th:text="${brand.getId()}"></td>
-                      <td th:text="${brand.getName()}"></td>
+                    <tr th:each="currUser : ${userList}">
+                      <td th:text="${currUser.getUserName()}"></td>
+                      <td th:text="${currUser.getName()}"></td>
+                      <td th:text="${currUser.getRoles()}"></td>
                       <td>
-                        <button type="button" class="btn btn-success"><a th:href="@{/manager/brand/edit/{id}(id=${brand.getId()})}"><img th:src="@{/manager_logo/pencil-square.svg}" alt=""></a></button>
-                        <button type="button" class="btn btn-danger"><a th:href="@{/manager/brand/delete/{id}(id=${brand.getId()})}"><img th:src="@{/manager_logo/trash.svg}" alt=""></a></button>
+                        <button type="button" class="btn btn-success"><a th:href="@{/manager/employee/edit/{id}(id=${currUser.getId()})}"><img th:src="@{/manager_logo/pencil-square.svg}" alt=""></a></button>
+                        <button type="button" class="btn btn-danger"><a th:href="@{/manager/employee/delete/{id}(id=${currUser.getId()})}"><img th:src="@{/manager_logo/trash.svg}" alt=""></a></button>
                       </td>
                     </tr>
 
