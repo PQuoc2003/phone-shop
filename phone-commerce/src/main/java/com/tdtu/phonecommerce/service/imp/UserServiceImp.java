@@ -50,5 +50,10 @@ public class UserServiceImp implements UserService {
 
     }
 
+    @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
 
 }

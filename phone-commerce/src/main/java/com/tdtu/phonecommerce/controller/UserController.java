@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.context.Context;
 
@@ -126,6 +127,24 @@ public class UserController {
 
 
     }
+
+    @GetMapping("/manager/employee/delete/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteById(id);
+        return "redirect:/manager/employee";
+    }
+
+
+    @GetMapping("/manager/employee/edit/{id}")
+    public String editUser(@PathVariable Long id){
+        return "redirect:/manager/employee";
+    }
+
+
+
+
+
+
 
 
 }
