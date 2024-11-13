@@ -58,6 +58,7 @@ public class SecurityConfig {
                                 .requestMatchers("/login").permitAll()
                                 .requestMatchers("/register").permitAll()
                                 .requestMatchers("/forgot-password").permitAll()
+                                .requestMatchers("/test-page/**").permitAll()
                                 .requestMatchers("/css/**", "/javascript/**", "/image/**").permitAll()
                                 .requestMatchers("/manager/**").hasAuthority(String.valueOf(Roles.ROLES_MANAGER))
                                 .anyRequest().authenticated()

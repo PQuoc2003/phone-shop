@@ -136,9 +136,33 @@ public class UserController {
 
 
     @GetMapping("/manager/employee/edit/{id}")
-    public String editUser(@PathVariable Long id){
-        return "redirect:/manager/employee";
+    public String editUser(@PathVariable Long id, Model model){
+
+        User editUser = userService.findById(id);
+
+        List<Roles> roles = new ArrayList<>();
+
+        roles.add(Roles.ROLES_EMPLOYEE);
+        roles.add(Roles.ROLES_MANAGER);
+        roles.add(Roles.ROLES_USER);
+        roles.add(Roles.ROLES_BLOGGER);
+
+
+        model.addAttribute("editUser", editUser);
+        model.addAttribute("rolesList", roles);
+
+        return "manager_template/manager_edit-employee";
     }
+
+
+//    @GetMapping("/test-page/employee/edit")
+//    public String testEditEmployee(Model model){
+//
+//        return "manager_template/manager_edit-employee";
+//
+//    }
+
+
 
 
 
