@@ -2,6 +2,7 @@ package com.tdtu.phonecommerce.controller;
 
 
 import com.tdtu.phonecommerce.dto.EmailRequest;
+import com.tdtu.phonecommerce.models.Product;
 import com.tdtu.phonecommerce.models.Roles;
 import com.tdtu.phonecommerce.models.User;
 import com.tdtu.phonecommerce.service.EmailService;
@@ -136,7 +137,7 @@ public class UserController {
 
 
     @GetMapping("/manager/employee/edit/{id}")
-    public String editUser(@PathVariable Long id, Model model){
+    public String editUserPage(@PathVariable Long id, Model model){
 
         User editUser = userService.findById(id);
 
@@ -155,16 +156,28 @@ public class UserController {
     }
 
 
-//    @GetMapping("/test-page/employee/edit")
-//    public String testEditEmployee(Model model){
-//
-//        return "manager_template/manager_edit-employee";
-//
-//    }
+
+    @PostMapping("/manager/employee/edit")
+    public String editUserProcess(@ModelAttribute("editUser") User updatedUser){
+
+        List<User> users = userService.findByEmail(updatedUser.getEmail());
+
+        if(!users.isEmpty()){
+            User checkedUser = users.get(0);
+
+            if(!checkedUser.getId().equals(updatedUser.getId())){
+                return "redirect:/manager/employee";
+            }
+
+        }
+
+        userService.saveUser(updatedUser);
 
 
 
 
+        return "redirect:/manager/employee";
+    }
 
 
 
