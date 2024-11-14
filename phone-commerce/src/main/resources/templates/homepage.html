@@ -14,7 +14,6 @@
     <!-- custom css file link  -->
     <link rel="stylesheet" th:href="@{/css/HomePage.css}">
 
-
 </head>
 
 <body>
@@ -26,7 +25,8 @@
             <a href="/homepage">Trang Chủ</a>
             <a href="/home">Sản Phẩm</a>
             <a th:if="${hasManagerRole}" href="/manager">Quản lý</a>
-            <a href="#blogs">Blogs</a>
+            <a th:if="${hasEmployeeRole}" href="/employee">Quản lý Sản Phẩm</a>
+<!--            <a href="#blogs">Blogs</a>-->
             <a href="/logout">Đăng xuất</a>
         </nav>
 
@@ -141,31 +141,31 @@
 
     <!-- blogs  section starts  -->
 
-    <section class="blogs" id="blogs">
+<!--    <section class="blogs" id="blogs">-->
 
-        <h1 class="heading"> our <span>blogs</span></h1>
-        <div class="swiper blogs-slider">
-            <div class="swiper-wrapper">
-                <div th:each="i : ${#numbers.sequence(0,4)}" class="swiper-slide slide">
-                    <div class="image">
-                        <img th:src="@{'/homepage_img/blogs/b' + ${i+1} + '.jpg'}" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>Hãy Đến với PQShop</h3>
-                        <p>Hân Hạnh Được Phục Vụ Quý Khách Hàng</p>
-                        <a href="#" class="btn">Đọc Thêm</a>
-                        <div class="icons">
-                            <a href="#"> <i class="fas fa-calendar"></i> 27th September 2024 </a>
-                            <a href="#"> <i class="fas fa-user"></i> Trang Chủ </a>
-                        </div>
-                    </div>
-                </div>
+<!--        <h1 class="heading"> our <span>blogs</span></h1>-->
+<!--        <div class="swiper blogs-slider">-->
+<!--            <div class="swiper-wrapper">-->
+<!--                <div th:each="i : ${#numbers.sequence(0,4)}" class="swiper-slide slide">-->
+<!--                    <div class="image">-->
+<!--                        <img th:src="@{'/homepage_img/blogs/b' + ${i+1} + '.jpg'}" alt="">-->
+<!--                    </div>-->
+<!--                    <div class="content">-->
+<!--                        <h3>Hãy Đến với PQShop</h3>-->
+<!--                        <p>Hân Hạnh Được Phục Vụ Quý Khách Hàng</p>-->
+<!--                        <a href="#" class="btn">Đọc Thêm</a>-->
+<!--                        <div class="icons">-->
+<!--                            <a href="#"> <i class="fas fa-calendar"></i> 27th September 2024 </a>-->
+<!--                            <a href="#"> <i class="fas fa-user"></i> Trang Chủ </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-    </section> 
+<!--            </div>-->
+<!--            <div class="swiper-button-next"></div>-->
+<!--            <div class="swiper-button-prev"></div>-->
+<!--        </div>-->
+<!--    </section> -->
     <!-- footer section starts  -->
 
     <section class="footer">
@@ -177,14 +177,6 @@
                 <img src="/homepage_img/blogs/footer.jpg" alt="" style="height: 300px;">
             </div>
 
-            <div class="box">
-                <h3>Danh Mục</h3>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Đồ Nam </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Nữ </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Trẻ Em </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Sản Phẩm Bán Chạy </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Sản Phẩm Mới</a>
-            </div>
 
             <div class="box">
                 <h3>Truy Cập</h3>
@@ -199,7 +191,7 @@
                 <h3>Truy Cập Nhanh</h3>
                 <a href="#"> <i class="fas fa-arrow-right"></i>Đơn Hàng Của Bạn</a>
                 <a href="#"> <i class="fas fa-arrow-right"></i>Tài Khoản Của Bạn</a>
-                <a href="#"> <i class="fas fa-arrow-right"></i>Bán Ngay Bây Giờ</a>
+<!--                <a href="#"> <i class="fas fa-arrow-right"></i>Bán Ngay Bây Giờ</a>-->
             </div>
 
         </div>

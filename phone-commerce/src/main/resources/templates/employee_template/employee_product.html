@@ -49,9 +49,23 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/employee/order" class="nav-link link-body-emphasis invidual-item">
+                    <a href="/employee/orders" class="nav-link link-body-emphasis invidual-item">
                         <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
                         Quản Lý Đơn Hàng
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/employee/orders" class="nav-link link-body-emphasis invidual-item">
+                        <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
+                        Đơn hàng đã giao
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/employee/orders" class="nav-link link-body-emphasis invidual-item">
+                        <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
+                        Đơn hàng đã hủy
                     </a>
                 </li>
 
@@ -118,9 +132,6 @@
                                         <button type="button" class="btn btn-success"><a
                                                 th:href="@{/employee/product/edit/{id}(id=${product.id})}"><img
                                                 th:src="@{/manager_logo/pencil-square.svg}" alt=""></a></button>
-                                        <button type="button" class="btn btn-warning"><a
-                                                th:href="@{/employee/product/detail/{id}(id=${product.id})}"><img
-                                                th:src="@{/manager_logo/columns-gap.svg}" alt=""></a></button>
                                     </td>
                                 </tr>
                             </table>

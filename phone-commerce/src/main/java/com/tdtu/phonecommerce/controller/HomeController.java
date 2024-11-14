@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping(value = {"/home", "/homepage"})
+    @GetMapping(value = {"/home", "/homepage", "/"})
     public String homePage(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -18,7 +18,12 @@ public class HomeController {
         boolean hasManagerRole = authentication.getAuthorities().stream()
                 .anyMatch(r -> r.getAuthority().equals("ROLES_MANAGER"));
 
+        boolean hasEmployeeRole = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLES_EMPLOYEE"));
+
         model.addAttribute("hasManagerRole", hasManagerRole);
+
+        model.addAttribute("hasEmployeeRole", hasEmployeeRole);
 
 
         return "homepage";

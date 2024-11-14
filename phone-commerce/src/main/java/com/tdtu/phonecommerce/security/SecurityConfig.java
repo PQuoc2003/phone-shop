@@ -61,6 +61,7 @@ public class SecurityConfig {
                                 .requestMatchers("/test-page/**").permitAll()
                                 .requestMatchers("/css/**", "/javascript/**", "/image/**").permitAll()
                                 .requestMatchers("/manager/**").hasAuthority(String.valueOf(Roles.ROLES_MANAGER))
+                                .requestMatchers("/employee/**").hasAuthority(String.valueOf(Roles.ROLES_EMPLOYEE))
                                 .anyRequest().authenticated()
                 )
                 .formLogin(login ->
@@ -80,7 +81,7 @@ public class SecurityConfig {
                         logout.invalidateHttpSession(true)
                                 .clearAuthentication(true)
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .logoutSuccessUrl("/")
+                                .logoutSuccessUrl("/login")
                                 .permitAll()
                 )
                 .authenticationManager(authenticationManager)

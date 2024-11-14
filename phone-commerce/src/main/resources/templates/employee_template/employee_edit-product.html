@@ -25,43 +25,43 @@
             <form enctype="multipart/form-data" method="post" th:action="@{/employee/product/edit/{id}(id=${product.getId()})}"
                   th:object="${product}" id="edit-product">
                 <div class="modal-body">
-                    <div class="form-group" readonly>
+                    <div class="form-group" >
                         <label for="id">Product ID</label>
-                        <input class="form-control" name="id" readonly required th:field="*{id}" type="text" id="id">
+                        <input readonly="readonly" class="form-control" name="id" readonly required th:field="*{id}" type="text" id="id">
                     </div>
-                    <div class="form-group" readonly>
+                    <div class="form-group" >
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" required th:field="*{name}" type="text" id="name">
+                        <input readonly="readonly" class="form-control" name="name" required th:field="*{name}" type="text" id="name">
                     </div>
-                    <div class="form-group" readonly>
+                    <div class="form-group" >
                         <label for="price">Price</label>
-                        <input class="form-control" name="price" required th:field="*{price}" type="text" id="price">
+                        <input readonly="readonly" class="form-control" name="price" required th:field="*{price}" type="text" id="price">
                     </div>
-                    <div class="form-group" readonly>
+                    <div class="form-group" >
                         <label for="description">Description</label>
-                        <textarea class="form-control" name="description" required th:field="*{description}" id="description"></textarea>
+                        <textarea readonly="readonly" class="form-control" name="description" required th:field="*{description}" id="description"></textarea>
                     </div>
 
 
-                    <div class="form-group" readonly>
+                    <div class="form-group" >
                         <label for="color">Color</label>
-                        <input class="form-control" name="color" required th:field="*{color}" type="text" id="color">
+                        <input readonly="readonly" class="form-control" name="color" required th:field="*{color}" type="text" id="color">
                     </div>
 
-                    <div class="form-group" readonly>
+                    <div class="form-group" >
                         <label for="brand">Brand</label>
-                        <input class="form-control" name="brand" required th:field="*{brand}" type="text" id="brand">
+                        <input readonly="readonly" class="form-control" name="brand" required th:field="*{brand}" type="text" id="brand">
                     </div>
 
-                    <div class="form-group" readonly>
+                    <div class="form-group" >
                         <label for="category">Category</label>
-                        <input class="form-control" name="category" required th:field="*{category}" type="text" id="category">
+                        <input readonly="readonly" class="form-control" name="category" required th:field="*{category}" type="text" id="category">
                     </div>
 
                     <!--Quantity-->
                     <div class="form-group" >
                         <label>Quantity</label>
-                        <input class="form-control" name="quantity" id="quantity" required type="text">
+                        <input class="form-control" name="quantity" id="quantity" required type="text" th:field="*{quantity}">
                         <div id="errorMessage" class="error"></div>
                     </div>
 

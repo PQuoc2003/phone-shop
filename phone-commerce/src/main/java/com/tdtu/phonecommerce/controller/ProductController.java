@@ -161,13 +161,6 @@ public class ProductController {
         return "manager_template/manager_product-details";
     }
 
-    @PostMapping(value = "/employee/product/edit/{id}")
-    public String editProductProcess(@ModelAttribute("product") Product updatedProduct
-    ) {
-        productService.updateProduct(updatedProduct);
-        return "redirect:/employee/product";
-
-    }
 
     @GetMapping(value = {"/employee/product", "/employee"})
     public String getEmployeeProductPage(Model model) {
@@ -180,7 +173,7 @@ public class ProductController {
     }
 
 
-    @GetMapping(value = "/manager/product/edit/{id}")
+    @GetMapping(value = "/employee/product/edit/{id}")
     public String getEmployeeEditProductPage(@PathVariable("id") Long id, Model model) {
 
         Product product = productService.getProductById(id);
@@ -194,9 +187,10 @@ public class ProductController {
 
         productService.updateProduct(updatedProduct);
 
-        return "redirect:/manager/product";
+        return "redirect:/employee/product";
 
     }
+
 
 
 }

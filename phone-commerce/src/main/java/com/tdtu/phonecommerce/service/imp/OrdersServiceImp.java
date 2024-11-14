@@ -24,6 +24,12 @@ public class OrdersServiceImp implements OrdersService {
     }
 
     @Override
+    public List<Orders> getAllByStatus(String status) {
+
+        return ordersRepository.findByStatus(status);
+    }
+
+    @Override
     public void addOrder(Orders order) {
         ordersRepository.save(order);
     }
@@ -40,6 +46,14 @@ public class OrdersServiceImp implements OrdersService {
         order.setOrder_status("Đã Giao Hàng");
         ordersRepository.save(order);
 
+    }
+
+    @Override
+    public void updateStatus(Long id, String status) {
+        Orders order = ordersRepository.findById(id).orElse(null);
+        if(order == null) return;
+        order.setOrder_status(status);
+        ordersRepository.save(order);
     }
 
     @Override

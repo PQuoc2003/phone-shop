@@ -23,6 +23,10 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
     @Query("SELECT ci FROM Orders ci WHERE ci.order_status = :status and ci.userOrder.userName = :username")
     List<Orders> findByUserNameAndStatus(String username, String status);
 
+    @Query("SELECT ci FROM Orders ci WHERE ci.order_status = :status")
+    List<Orders> findByStatus(String status);
+
+
 
 
 }

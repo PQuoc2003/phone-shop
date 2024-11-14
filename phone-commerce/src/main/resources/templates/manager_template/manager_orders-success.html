@@ -123,7 +123,6 @@
                       <th>Tổng Tiền</th>
                       <th>Ngày Đặt</th>
                       <th>Trạng Thái</th>
-                      <th>Hành Động</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -133,10 +132,6 @@
                       <td th:text="${order.getTotal()}"></td>
                       <td th:text="${order.getOrderCreated()}"></td>
                       <td th:text="${order.getOrder_status()}"></td>
-                      <td>
-                        <button type="button" class="btn btn-success"><a th:href="@{/manager/orders/edit/{id}(id=${order.id})}"><img th:src="@{/manager_logo/pencil-square.svg}" alt=""></a></button>
-                        <button type="button" class="btn btn-danger"><a th:href="@{/manager/orders/delete/{id}(id=${order.id})}"><img th:src="@{/manager_logo/trash.sgv}" alt=""></a></button>
-                      </td>
                     </tr>
                   </tbody>
                 </table>

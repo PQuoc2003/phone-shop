@@ -4,12 +4,15 @@ import com.tdtu.phonecommerce.dto.OrdersDTO;
 import com.tdtu.phonecommerce.models.CartItems;
 import com.tdtu.phonecommerce.models.Orders;
 import com.tdtu.phonecommerce.models.Product;
+import com.tdtu.phonecommerce.models.Roles;
 import com.tdtu.phonecommerce.service.CartItemsService;
 import com.tdtu.phonecommerce.service.OrdersService;
 import com.tdtu.phonecommerce.service.ProductService;
 import com.tdtu.phonecommerce.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,10 +47,9 @@ public class OrderController {
         this.productService = productService;
     }
 
-    @GetMapping("/manager/orders")
-    public String getAdminOrderPage(Model model) {
+    private List<OrdersDTO> getOrdersDTOByStatus(String status) {
 
-        List<Orders> orders = ordersService.getAllOrder();
+        List<Orders> orders = ordersService.getAllByStatus(status);
 
         List<OrdersDTO> ordersDTOS = new ArrayList<>();
 
@@ -57,28 +59,115 @@ public class OrderController {
             ordersDTOS.add(ordersDTO);
         }
 
+        return ordersDTOS;
+    }
+
+    @GetMapping(value = {"/manager/orders", "/employee/orders"})
+    public String getOrderPage(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean isManager = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLES_MANAGER"));
+
+
+//        List<Orders> orders = ordersService.getAllOrder();
+
+        String status = "Chưa giao hàng";
+
+
+        List<OrdersDTO> ordersDTOS = this.getOrdersDTOByStatus(status);
+
         model.addAttribute("orders", ordersDTOS);
 
-        return "manager_template/manager_orders";
+        if (isManager) {
+            return "manager_template/manager_orders";
+        }
+
+        return "employee_template/employee_orders";
 
     }
 
-    @GetMapping("/manager/orders/delete/{id}")
+    @GetMapping(value = {"/manager/orders/{type}", "/employee/orders/{type}"})
+    public String getSuccessOrdersPage(@PathVariable String type, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean isManager = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLES_MANAGER"));
+
+
+        String status = "Đã giao hàng";
+
+        if(type.equals("cancel")) status = "Đã hủy";
+
+        List<OrdersDTO> ordersDTOS = this.getOrdersDTOByStatus(status);
+
+        model.addAttribute("orders", ordersDTOS);
+
+        if (isManager) {
+            return "manager_template/manager_orders-success";
+        }
+
+        return "employee_template/employee_orders-success";
+
+
+    }
+
+    @GetMapping(value = {"/manager/orders/delete/{id}", "/employee/orders/delete/{id}"})
     public String deleteOrder(@PathVariable Long id) {
-        ordersService.deleteById(id);
-        return "redirect:/manager/orders";
-    }
 
-    @GetMapping("/manager/orders/edit/{id}")
-    public String updateStatus(@PathVariable Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean isManager = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLES_MANAGER"));
+
+
+        String status = "Đã Hủy";
+        ordersService.updateStatus(id, status);
 
         Orders orders = ordersService.getOrdersById(id);
 
-        if(orders == null) return "redirect:/manager/orders";
+        Long cartId = orders.getCart().getId();
+
+        List<CartItems> cartItemsList = cartItemsService.getCartItemByCartId(cartId);
+
+        for (CartItems cartItems : cartItemsList) {
+            Product product = cartItems.getProduct();
+            int quantity = cartItems.getQuantity();
+            int currentQuantity = product.getQuantity();
+            int newQuantity = currentQuantity + quantity;
+            product.setQuantity(newQuantity);
+            productService.updateProduct(product);
+        }
+
+        if (isManager) return "redirect:/manager/orders";
+
+        return "redirect:/employee/orders";
+    }
+
+    @GetMapping(value = {"/manager/orders/edit/{id}", "/employee/orders/edit/{id}"})
+    public String updateStatus(@PathVariable Long id) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean isManager = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLES_MANAGER"));
+
+        Orders orders = ordersService.getOrdersById(id);
+
+        if (orders == null) {
+            if (isManager)
+                return "redirect:/manager/orders";
+            return "redirect:/employee/orders";
+        }
 
 
         ordersService.updateStatus(id);
-        return "redirect:/manager/orders";
+
+        if (isManager)
+            return "redirect:/manager/orders";
+        return "redirect:/employee/orders";
     }
 
     @GetMapping(value = "/orders-page")
@@ -104,7 +193,7 @@ public class OrderController {
 
             List<CartItems> cartItems = cartItemsService.getCartItemByCartId(cartId);
 
-            for (CartItems cartItem: cartItems) {
+            for (CartItems cartItem : cartItems) {
                 Product product = cartItem.getProduct();
                 // Quantity còn lại = số lượng hiện tại - số lượng của cart
                 product.setQuantity(product.getQuantity() - cartItem.getQuantity());
