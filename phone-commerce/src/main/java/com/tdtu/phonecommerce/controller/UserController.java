@@ -69,7 +69,6 @@ public class UserController {
         roles.add(Roles.ROLES_EMPLOYEE);
         roles.add(Roles.ROLES_MANAGER);
         roles.add(Roles.ROLES_USER);
-        roles.add(Roles.ROLES_BLOGGER);
 
         model.addAttribute("roles", roles);
 
@@ -126,7 +125,6 @@ public class UserController {
 
         return "redirect:/manager/employee/add";
 
-
     }
 
     @GetMapping("/manager/employee/delete/{id}")
@@ -134,7 +132,6 @@ public class UserController {
         userService.deleteById(id);
         return "redirect:/manager/employee";
     }
-
 
     @GetMapping("/manager/employee/edit/{id}")
     public String editUserPage(@PathVariable Long id, Model model){
@@ -146,7 +143,6 @@ public class UserController {
         roles.add(Roles.ROLES_EMPLOYEE);
         roles.add(Roles.ROLES_MANAGER);
         roles.add(Roles.ROLES_USER);
-        roles.add(Roles.ROLES_BLOGGER);
 
 
         model.addAttribute("editUser", editUser);
@@ -154,8 +150,6 @@ public class UserController {
 
         return "manager_template/manager_edit-employee";
     }
-
-
 
     @PostMapping("/manager/employee/edit")
     public String editUserProcess(@ModelAttribute("editUser") User updatedUser){
@@ -173,14 +167,8 @@ public class UserController {
 
         userService.saveUser(updatedUser);
 
-
-
-
         return "redirect:/manager/employee";
     }
-
-
-
 
 
 

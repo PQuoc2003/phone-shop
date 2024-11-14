@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>PQShop Admin</title>
+
+    <!-- Favicons -->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap-grid.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <meta name="theme-color" content="#712cf9">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/manager.css}">
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- _____________________________________ -->
+
+        <!-- Side Bar ____________________________________ -->
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary col-lg-2" id="sidebar"
+             style="min-height: 100vh;">
+            <ul class="nav nav-pills flex-column mb-auto list-item">
+
+                <a href="/employee"
+                   class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32"></svg>
+                    <span class="fs-4"><i class="fas fa-shopping-cart"></i>PQShop</span>
+                </a>
+
+                <hr>
+                <li class="nav-item">
+                    <a href="/homepage" class="nav-link active invidual-item" aria-current="page">
+                        <img th:src="@{/manager_logo/house-door.svg}" alt="">
+                        Trang Chủ
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/employee/product" class="nav-link link-body-emphasis invidual-item">
+                        <img th:src="@{/manager_logo/box2.svg}" alt="">
+                        Sản Phẩm
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/employee/order" class="nav-link link-body-emphasis invidual-item">
+                        <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
+                        Quản Lý Đơn Hàng
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- ____________________________________________________________________________________________-->
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="min-height: 100vh;">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div style="padding-top :15px; padding-bottom: 5px; ">
+                            <button type="button" class="btn btn-danger"><img th:src="@{/manager_logo/github.svg}"
+                                                                              alt=""><a href=""></a></button>
+                            <button type="button" class="btn btn-outline-secondary"><a href=""><img
+                                    th:src="@{/manager_logo/gear.svg}" alt=""></a></button>
+                            <button type="button" class="btn btn-outline-secondary"><img
+                                    th:src="@{/manager_logo/person-lock.svg}" alt=""></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row" style="padding: 20px;">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                        </div>
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-striped" id="table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hình</th>
+                                    <th>Sản Phẩm</th>
+                                    <th>Danh Mục</th>
+                                    <th>Màu Sắc</th>
+                                    <th>Thương Hiệu</th>
+                                    <th>Giá Tiền</th>
+                                    <th>Số lượng</th>
+                                    <th>Hành Động</th>
+                                </tr>
+                                </thead>
+                                <tr th:each="product : ${products}">
+                                    <td th:text="${product.getId()}" ></td>
+                                    <td>
+                                        <img th:src="@{/image/__${product.getPicture()}__}"  alt=""
+                                             style="width: 100px; height: 150px;">
+                                    </td>
+                                    <td th:text="${product.getName()}" >
+                                    </td>
+                                    <td th:text="${product.getCategory().getName()}" >
+                                    </td>
+                                    <td th:text="${product.getColor().getName()}" ></td>
+                                    <td th:text="${product.getBrand().getName()}" ></td>
+                                    <td th:text="${product.getPrice()}"></td>
+                                    <td th:text="${product.getQuantity()}"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-success"><a
+                                                th:href="@{/employee/product/edit/{id}(id=${product.id})}"><img
+                                                th:src="@{/manager_logo/pencil-square.svg}" alt=""></a></button>
+                                        <button type="button" class="btn btn-warning"><a
+                                                th:href="@{/employee/product/detail/{id}(id=${product.id})}"><img
+                                                th:src="@{/manager_logo/columns-gap.svg}" alt=""></a></button>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script th:src="@{/javascript/Sidebar_Admin.js}"></script>
+</body>
+
+</html>
