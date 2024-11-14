@@ -27,18 +27,18 @@
                 <div class="modal-body">
                     <!--Name-->
                     <div class="form-group">
-                        <label>Name</label>
-                        <input class="form-control" name="name" required type="text">
+                        <label for="name">Name</label>
+                        <input class="form-control" name="name" id="name" required type="text">
                     </div>
                     <!--Price-->
                     <div class="form-group">
-                        <label>Price</label>
-                        <input class="form-control" name="price" required type="text">
+                        <label for="price">Price</label>
+                        <input class="form-control" name="price" id="price" required type="text">
                     </div>
                     <!--Description-->
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" name="description" required></textarea>
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" required></textarea>
                     </div>
                     <!--image-->
                     <label>Image</label>
@@ -48,21 +48,21 @@
                     </div>
                     <!--Color-->
                     <div class="form-group">
-                        <label>Color</label>
+                        <label for="color">Color</label>
                         <select class="form-control" id="color" name="color">
                             <option th:each="color: ${colors}" th:value="${color.getId()}">[[${color.getName()}]]</option>
                         </select>
                     </div>
                     <!--Brand-->
                     <div class="form-group">
-                        <label>Brand</label>
+                        <label for="brand">Brand</label>
                         <select class="form-control" id="brand" name="brand">
                             <option th:each="brand: ${brands}" th:value="${brand.id}">[[${brand.name}]]</option>
                         </select>
                     </div>
                     <!--category-->
                     <div class="form-group">
-                        <label>Category</label>
+                        <label for="categories">Category</label>
                         <select class="form-control" id="categories" name="category" title="Select Category">
                             <option th:each="category: ${categories}" th:value="${category.id}">[[${category.name}]]
                             </option>
@@ -71,7 +71,7 @@
 
                     <!--Quantity-->
                     <div class="form-group">
-                        <label>Quantity</label>
+                        <label for="quantity">Quantity</label>
                         <input class="form-control" name="quantity" id="quantity" required type="text">
                         <div id="errorMessage" class="error"></div>
                     </div>

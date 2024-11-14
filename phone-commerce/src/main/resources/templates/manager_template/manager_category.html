@@ -27,7 +27,7 @@
            style="min-height: 100vh;">
         <ul class="nav nav-pills flex-column mb-auto list-item">
 
-          <a href="/admin"
+          <a href="/manager"
              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi me-2" width="40" height="32"></svg>
             <span class="fs-4"><i class="fas fa-shopping-cart"></i>PQShop</span>
@@ -35,14 +35,14 @@
 
           <hr>
           <li class="nav-item">
-            <a href="/admin" class="nav-link active invidual-item" aria-current="page">
+            <a href="/manager" class="nav-link active invidual-item" aria-current="page">
               <img th:src="@{/manager_logo/house-door.svg}" alt="">
               Trang Chủ
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/admin/product" class="nav-link link-body-emphasis invidual-item">
+            <a href="/manager/product" class="nav-link link-body-emphasis invidual-item">
 
               <img th:src="@{/manager_logo/box2.svg}" alt="">
               Sản Phẩm
@@ -50,30 +50,51 @@
           </li>
 
           <li class="nav-item">
-            <a href="/admin/category" class="nav-link link-body-emphasis invidual-item">
+            <a href="/manager/category" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/grid-3x3.svg}" alt="">
               Danh Mục
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/admin/color" class="nav-link link-body-emphasis invidual-item">
+            <a href="/manager/color" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/paint-bucket.svg}" alt="">
               Màu Sắc
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/admin/brand" class="nav-link link-body-emphasis invidual-item">
+            <a href="/manager/brand" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/slack.svg}" alt="">
               Thương Hiệu
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/admin/order" class="nav-link link-body-emphasis invidual-item">
+            <a href="/manager/orders" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
               Quản Lý Đơn Hàng
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/manager/orders/success" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
+              Đơn Hàng Đã Giao
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/manager/orders/cancel" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
+              Đơn Hàng Đã Hủy
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/manager/employee" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
+              Nhân viên
             </a>
           </li>
 
