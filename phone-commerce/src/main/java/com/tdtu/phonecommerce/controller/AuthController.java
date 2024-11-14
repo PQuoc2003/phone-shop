@@ -26,7 +26,7 @@ public class AuthController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    @GetMapping(value = {"/", "/login"})
+    @GetMapping(value = { "/login"})
     public String loginForm(Model model, User user) {
         model.addAttribute("user", user);
         return "Login";

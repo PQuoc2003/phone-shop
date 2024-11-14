@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light" xmlns:th="https://www.thymeleaf.org">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,14 +9,13 @@
 
   <!-- Favicons -->
   <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
-  <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap-grid.css}">
+  <link rel="stylesheet" th:href="@{bootstrap/css/bootstrap-grid.css}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <meta name="theme-color" content="#712cf9">
   <!-- Custom styles for this template -->
   <link rel="stylesheet" th:href="@{/css/manager.css}">
 </head>
-
 
 <body>
   <div class="container-fluid">
@@ -27,7 +27,7 @@
            style="min-height: 100vh;">
         <ul class="nav nav-pills flex-column mb-auto list-item">
 
-          <a href="/manager"
+          <a href="/admin"
              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi me-2" width="40" height="32"></svg>
             <span class="fs-4"><i class="fas fa-shopping-cart"></i>PQShop</span>
@@ -35,14 +35,14 @@
 
           <hr>
           <li class="nav-item">
-            <a href="/manager" class="nav-link active invidual-item" aria-current="page">
+            <a href="/admin" class="nav-link active invidual-item" aria-current="page">
               <img th:src="@{/manager_logo/house-door.svg}" alt="">
               Trang Chủ
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/manager/product" class="nav-link link-body-emphasis invidual-item">
+            <a href="/admin/product" class="nav-link link-body-emphasis invidual-item">
 
               <img th:src="@{/manager_logo/box2.svg}" alt="">
               Sản Phẩm
@@ -50,43 +50,37 @@
           </li>
 
           <li class="nav-item">
-            <a href="/manager/category" class="nav-link link-body-emphasis invidual-item">
+            <a href="/admin/category" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/grid-3x3.svg}" alt="">
               Danh Mục
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/manager/color" class="nav-link link-body-emphasis invidual-item">
+            <a href="/admin/color" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/paint-bucket.svg}" alt="">
               Màu Sắc
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/manager/brand" class="nav-link link-body-emphasis invidual-item">
+            <a href="/admin/brand" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/slack.svg}" alt="">
               Thương Hiệu
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/manager/order" class="nav-link link-body-emphasis invidual-item">
+            <a href="/admin/order" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
               Quản Lý Đơn Hàng
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="/manager/employee" class="nav-link link-body-emphasis invidual-item">
-              <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
-              Nhân viên
             </a>
           </li>
 
         </ul>
       </div>
       <!-- ____________________________________________________________________________________________-->
+
 
 
 
@@ -108,36 +102,35 @@
           </div>
         </div>
         <hr>
+        <div class="container">
+          <a href="/manager/employee/add" class="add-product-btn">Thêm Nhân Viên</a>
+        </div>
         <div class="row" style="padding: 20px;">
           <div class="col-md-12">
             <div class="card">
               <div class="header">
               </div>
-
               <div class="content table-responsive table-full-width">
                 <table class="table table-striped" id="table">
-                  <thead>
-                    <tr >
-                      <th>ID</th>
-                      <th>Tài Khoản</th>
-                      <th>Tổng Tiền</th>
-                      <th>Ngày Đặt</th>
-                      <th>Trạng Thái</th>
+                  <thead >
+                    <tr>
+                      <th>Username</th>
+                      <th>Tên</th>
+                      <th>Roles</th>
                       <th>Hành Động</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:each="order : ${orders}">
-                      <td th:text="${order.getId()}"></td>
-                      <td th:text="${order.getEmail()}"></td>
-                      <td th:text="${order.getTotal()}"></td>
-                      <td th:text="${order.getOrderCreated()}"></td>
-                      <td th:text="${order.getOrder_status()}"></td>
+                    <tr th:each="currUser : ${userList}">
+                      <td th:text="${currUser.getUserName()}"></td>
+                      <td th:text="${currUser.getName()}"></td>
+                      <td th:text="${currUser.getRoles()}"></td>
                       <td>
-                        <button type="button" class="btn btn-success"><a th:href="@{/manager/orders/edit/{id}(id=${order.id})}"><img th:src="@{/manager_logo/pencil-square.svg}" alt=""></a></button>
-                        <button type="button" class="btn btn-danger"><a th:href="@{/manager/orders/delete/{id}(id=${order.id})}"><img th:src="@{/manager_logo/trash.sgv}" alt=""></a></button>
+                        <button type="button" class="btn btn-success"><a th:href="@{/manager/employee/edit/{id}(id=${currUser.getId()})}"><img th:src="@{/manager_logo/pencil-square.svg}" alt=""></a></button>
+                        <button type="button" class="btn btn-danger"><a th:href="@{/manager/employee/delete/{id}(id=${currUser.getId()})}"><img th:src="@{/manager_logo/trash.svg}" alt=""></a></button>
                       </td>
                     </tr>
+
                   </tbody>
                 </table>
 

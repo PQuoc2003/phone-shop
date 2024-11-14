@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{css/manager/style.css}"/>
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          referrerpolicy="no-referrer" rel="stylesheet"/>
+    <meta charset="utf-8"/>
+    <title>Edit Employee</title>
+</head>
+<body>
+
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <h2>Edit Product</h2>
+            </div>
+
+            <form enctype="multipart/form-data" method="post"
+                  th:action="@{/manager/employee/edit}"
+                  id="edit-employee" th:object="${editUser}">
+                <div class="modal-body">
+
+                    <!--Username -->
+                    <div class="form-group">
+                        <label for="userName">Username</label>
+                        <input class="form-control" name="userName" readonly required type="text"
+                               id="userName" th:field="*{userName}">
+                    </div>
+
+                    <!--Name-->
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input class="form-control" name="name" required type="text" id="name" th:field="*{name}">
+                    </div>
+
+
+                    <!--Email-->
+                    <div class="form-group">
+                        <label for="user-email">Email</label>
+                        <input class="form-control" name="user-email" required type="text" id="user-email"
+                               th:field="*{email}">
+                    </div>
+
+                    <!--Roles-->
+                    <div class="form-group">
+                        <label for="roles">Roles</label>
+                        <select class="form-control" id="roles" name="roles" th:field="*{roles}">
+                            <option th:each="singleRole: ${rolesList}" th:text="${singleRole}"
+                                    th:value="${singleRole}">
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a th:href="@{/manager/employee}"><input class="btn btn-default" data-dismiss="modal" type="button"
+                                                            value="Cancel"></a>
+                    <input class="btn btn-success" type="submit" value="Update">
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

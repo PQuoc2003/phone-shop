@@ -65,11 +65,11 @@ public class ProductController {
                              @RequestParam("image") MultipartFile image) {
 
 
-        if(image.getOriginalFilename() == null) return "redirect: /manager/product/add";
+        if (image.getOriginalFilename() == null) return "redirect: /manager/product/add";
 
         String sourceDirectory = "src/main/resources/static";
         String uploadDirectory = "/image";
-        String finalDirectory  = sourceDirectory + uploadDirectory;
+        String finalDirectory = sourceDirectory + uploadDirectory;
 
 
         String times = String.valueOf(Instant.now().getEpochSecond());
@@ -146,7 +146,7 @@ public class ProductController {
     }
 
     @GetMapping("/manager/product/detail/{id}")
-    public String getProductDetailPage(@PathVariable("id") Long id, Model model){
+    public String getProductDetailPage(@PathVariable("id") Long id, Model model) {
 
         Product product = productService.getProductById(id);
 
@@ -160,6 +160,37 @@ public class ProductController {
 
         return "manager_template/manager_product-details";
     }
+
+
+    @GetMapping(value = {"/employee/product", "/employee"})
+    public String getEmployeeProductPage(Model model) {
+
+        List<Product> productList = productService.getAllProducts();
+        model.addAttribute("products", productList);
+
+        return "employee_template/employee_product";
+
+    }
+
+
+    @GetMapping(value = "/employee/product/edit/{id}")
+    public String getEmployeeEditProductPage(@PathVariable("id") Long id, Model model) {
+
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+
+        return "employee_template/employee_edit-product";
+    }
+
+    @PostMapping(value = "/employee/product/edit/{id}")
+    public String editQuantity(@ModelAttribute("product") Product updatedProduct) {
+
+        productService.updateProduct(updatedProduct);
+
+        return "redirect:/employee/product";
+
+    }
+
 
 
 }

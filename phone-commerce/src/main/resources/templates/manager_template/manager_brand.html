@@ -125,7 +125,7 @@
                       <td th:text="${brand.getName()}"></td>
                       <td>
                         <button type="button" class="btn btn-success"><a th:href="@{/manager/brand/edit/{id}(id=${brand.getId()})}"><img th:src="@{/manager_logo/pencil-square.svg}" alt=""></a></button>
-                        <button type="button" class="btn btn-danger"><a th:href="@{/manager/color/delete/{id}(id=${brand.getId()})}"><img th:src="@{/manager_logo/trash.svg}" alt=""></a></button>
+                        <button type="button" class="btn btn-danger"><a th:href="@{/manager/brand/delete/{id}(id=${brand.getId()})}"><img th:src="@{/manager_logo/trash.svg}" alt=""></a></button>
                       </td>
                     </tr>
 

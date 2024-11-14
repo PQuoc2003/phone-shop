@@ -10,11 +10,15 @@ public interface OrdersService {
 
     List<Orders> getAllOrder();
 
+    List<Orders> getAllByStatus(String status);
+
     void addOrder(Orders order);
 
     void deleteById(Long id);
 
     void updateStatus(Long id);
+
+    void updateStatus(Long id, String status);
 
     Orders getOrdersById(Long id);
 

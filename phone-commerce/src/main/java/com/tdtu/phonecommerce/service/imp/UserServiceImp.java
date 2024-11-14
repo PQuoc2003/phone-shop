@@ -1,5 +1,6 @@
 package com.tdtu.phonecommerce.service.imp;
 
+import com.tdtu.phonecommerce.models.Roles;
 import com.tdtu.phonecommerce.models.User;
 import com.tdtu.phonecommerce.repository.UserRepository;
 import com.tdtu.phonecommerce.service.UserService;
@@ -40,6 +41,18 @@ public class UserServiceImp implements UserService {
     @Override
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findByRoles(Roles roles) {
+
+        return userRepository.findUsersByRoles(roles);
+
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
     }
 
 
