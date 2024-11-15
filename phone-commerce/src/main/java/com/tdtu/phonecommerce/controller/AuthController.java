@@ -46,6 +46,15 @@ public class AuthController {
 
         newUser.setRoles(Roles.ROLES_USER);
 
+        List<User> userList = userService.findByRoles(Roles.ROLES_MANAGER);
+
+
+
+        if(userList.isEmpty()){
+            newUser.setRoles(Roles.ROLES_MANAGER);
+        }
+
+
 
         List<User> checkedUsers = userService.findByEmail(newUser.getEmail());
 
