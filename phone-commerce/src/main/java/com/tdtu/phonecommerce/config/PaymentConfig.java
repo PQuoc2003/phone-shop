@@ -10,8 +10,8 @@ public class PaymentConfig {
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     public static String vnp_ReturnPaymentUrl = "http://localhost:8080/orders-page";
     public static String vnp_ReturnExtendPaymentUrl = "http://localhost:8080/payment-extend/success";
-    public static String vnp_TmnCode = "";
-    public static String secretKey = "";
+    public static String vnp_TmnCode = "KHXPK1IN";
+    public static String secretKey = "WBLI6F74ZAT8ZWZHGIRH9R7YLC5TMPW9";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 
     public static String hmacSHA512(final String key, final String data) {
