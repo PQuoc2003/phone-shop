@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <title>PQShop Admin</title>
+  <title>HPQShop</title>
 
   <!-- Favicons -->
   <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
@@ -30,7 +30,7 @@
           <a href="/manager"
              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi me-2" width="40" height="32"></svg>
-            <span class="fs-4"><i class="fas fa-shopping-cart"></i>PQShop</span>
+            <span class="fs-4"><i class="fas fa-shopping-cart"></i>HPQShop</span>
           </a>
 
           <hr>
@@ -149,7 +149,7 @@
                       <td th:text="${order.getOrder_status()}"></td>
                       <td>
                         <button type="button" class="btn btn-success"><a th:href="@{/manager/orders/edit/{id}(id=${order.id})}"><img th:src="@{/manager_logo/pencil-square.svg}" alt=""></a></button>
-                        <button type="button" class="btn btn-danger"><a th:href="@{/manager/orders/delete/{id}(id=${order.id})}"><img th:src="@{/manager_logo/trash.sgv}" alt=""></a></button>
+                        <button type="button" class="btn btn-danger"><a th:href="@{/manager/orders/delete/{id}(id=${order.id})}"><img th:src="@{/manager_logo/trash.svg}" alt=""></a></button>
                       </td>
                     </tr>
                   </tbody>
