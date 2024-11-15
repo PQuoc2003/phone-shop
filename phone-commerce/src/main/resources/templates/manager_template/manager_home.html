@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <title>PQShop</title>
+  <title>HPQShop</title>
 
   <!-- Favicons -->
   <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
@@ -29,7 +29,7 @@
           <a href="/manager"
              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi me-2" width="40" height="32"></svg>
-            <span class="fs-4"><i class="fas fa-shopping-cart"></i>PQShop</span>
+            <span class="fs-4"><i class="fas fa-shopping-cart"></i>HPQShop</span>
           </a>
 
           <hr>
@@ -73,6 +73,20 @@
             <a href="/manager/orders" class="nav-link link-body-emphasis invidual-item">
               <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
               Quản Lý Đơn Hàng
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/manager/orders/success" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
+              Đơn Hàng Đã Giao
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/manager/orders/cancel" class="nav-link link-body-emphasis invidual-item">
+              <img th:src="@{/manager_logo/bag-dash.svg}" alt="">
+              Đơn Hàng Đã Hủy
             </a>
           </li>
 
@@ -127,51 +141,51 @@
           <div class="container">
 
             <div class="row row-cols-1 row-cols-md-2 row-cols-md-3 g-3">
-              <div class="col">
-                <div class="card shadow-sm">
-                  <img th:src="@{/homepage_img/iphone-15-pro-max-black-2-1.jpg}" alt="" style="width: 100%; height: 300px;">
-                  <div class="card-body">
-                    <p class="card-text">PQShop Xin Hỗ Trợ Tất Cả Các Mặt Hàng</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                      </div>
-                      <small class="text-body-secondary">9 mins</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm">
-                  <img th:src="@{/homepage_img/iphone-14-plus-xanh-1.jpg}" alt="" style="width: 100%; height: 300px;">
-                  <div class="card-body">
-                    <p class="card-text">Đây Là Trang Admin chỉ dành cho Quản Trị Viên </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                      </div>
-                      <small class="text-body-secondary">9 mins</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm">
-                  <img th:src="@{/homepage_img/samsung-galaxy-s23-ultra-xanh-1.jpg}" alt="" style="width: 100px; height: 300px;">
-                  <div class="card-body">
-                    <p class="card-text">Được Thiết Kế Và Xây dựng phần mềm bởi Thành Long.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                      </div>
-                      <small class="text-body-secondary">9 mins</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<!--              <div class="col">-->
+<!--                <div class="card shadow-sm">-->
+<!--                  <img th:src="@{/homepage_img/iphone-15-pro-max-black-2-1.jpg}" alt="" style="width: 100%; height: 300px;">-->
+<!--                  <div class="card-body">-->
+<!--                    <p class="card-text">HPQShop Xin Hỗ Trợ Tất Cả Các Mặt Hàng</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                      <div class="btn-group">-->
+<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+<!--                      </div>-->
+<!--                      <small class="text-body-secondary">9 mins</small>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col">-->
+<!--                <div class="card shadow-sm">-->
+<!--                  <img th:src="@{/homepage_img/iphone-14-plus-xanh-1.jpg}" alt="" style="width: 100%; height: 300px;">-->
+<!--                  <div class="card-body">-->
+<!--                    <p class="card-text">Đây Là Trang Admin chỉ dành cho Quản Trị Viên </p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                      <div class="btn-group">-->
+<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+<!--                      </div>-->
+<!--                      <small class="text-body-secondary">9 mins</small>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col">-->
+<!--                <div class="card shadow-sm">-->
+<!--                  <img th:src="@{/homepage_img/samsung-galaxy-s23-ultra-xanh-1.jpg}" alt="" style="width: 100px; height: 300px;">-->
+<!--                  <div class="card-body">-->
+<!--                    <p class="card-text">Được Thiết Kế Và Xây dựng phần mềm bởi Phú Quốc.</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                      <div class="btn-group">-->
+<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+<!--                      </div>-->
+<!--                      <small class="text-body-secondary">9 mins</small>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
             </div>
           </div>
         </div>

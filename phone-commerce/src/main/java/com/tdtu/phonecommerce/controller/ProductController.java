@@ -129,8 +129,55 @@ public class ProductController {
 
     @PostMapping(value = "/manager/product/edit/{id}")
     public String editProductProcess(@ModelAttribute("product") Product updatedProduct,
-                                     @RequestParam("image") String image) {
-        updatedProduct.setPicture(image);
+                                     @RequestParam("image") MultipartFile image) {
+
+        if(image == null){
+            Product product = productService.getProductById(updatedProduct.getId());
+            updatedProduct.setPicture(product.getPicture());
+            productService.updateProduct(updatedProduct);
+            return "redirect:/manager/product";
+
+        }
+
+        if (image.getOriginalFilename() == null) return "redirect: /manager/product/add";
+
+        String sourceDirectory = "src/main/resources/static";
+        String uploadDirectory = "/image";
+        String finalDirectory = sourceDirectory + uploadDirectory;
+
+
+        String times = String.valueOf(Instant.now().getEpochSecond());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getName();
+
+        if (username.isEmpty())
+            return "redirect:/login";
+
+
+        String[] nameList = image.getOriginalFilename().split("\\.");
+
+        if (nameList.length < 2) return "redirect:/manager/product/add";
+
+        String fileExtension = nameList[nameList.length - 1];
+
+        String fileName = username + times + "." + fileExtension;
+
+        Path path = Paths.get(finalDirectory, fileName);
+
+
+        try {
+
+            Files.write(path, image.getBytes());
+
+        } catch (Exception e) {
+            System.out.println("Error when upload file");
+        }
+
+
+        updatedProduct.setPicture(fileName);
+
         productService.updateProduct(updatedProduct);
 
         return "redirect:/manager/product";
@@ -184,6 +231,13 @@ public class ProductController {
 
     @PostMapping(value = "/employee/product/edit/{id}")
     public String editQuantity(@ModelAttribute("product") Product updatedProduct) {
+
+
+        Product product = productService.getProductById(updatedProduct.getId());
+
+        String picture = product.getPicture();
+
+        updatedProduct.setPicture(picture);
 
         productService.updateProduct(updatedProduct);
 
