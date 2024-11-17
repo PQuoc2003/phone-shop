@@ -12,7 +12,7 @@
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           referrerpolicy="no-referrer" rel="stylesheet"/>
     <meta charset="utf-8"/>
-    <title>Edit Employee</title>
+    <title>User Details</title>
 </head>
 <body>
 
@@ -20,18 +20,18 @@
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
-                <h2>Edit Product</h2>
+                <h2>User Information</h2>
             </div>
 
             <form enctype="multipart/form-data" method="post"
-                  th:action="@{/manager/employee/edit}"
+                  th:action="@{/user/edit}"
                   id="edit-employee" th:object="${editUser}">
                 <div class="modal-body">
 
                     <!--Username -->
                     <div class="form-group">
                         <label for="userName">Username</label>
-                        <input class="form-control" name="userName" readonly required type="text"
+                        <input class="form-control" name="userName" readonly="readonly" required type="text"
                                id="userName" th:field="*{userName}">
                     </div>
 
@@ -49,19 +49,18 @@
                                th:field="*{email}">
                     </div>
 
-                    <!--Roles-->
-                    <div class="form-group">
-                        <label for="roles">Roles</label>
-                        <select class="form-control" id="roles" name="roles" th:field="*{roles}">
-                            <option th:each="singleRole: ${rolesList}" th:text="${singleRole}"
-                                    th:value="${singleRole}">
-                            </option>
-                        </select>
+                    <div th:if="${errorMessage}" class="alert alert-danger">
+                        <p th:text="${errorMessage}"></p>
                     </div>
+
+                    <div th:if="${successMessage}" class="alert alert-success">
+                        <p th:text="${successMessage}"></p>
+                    </div>
+
 
                 </div>
                 <div class="modal-footer">
-                    <a th:href="@{/manager/employee}"><input class="btn btn-default" data-dismiss="modal" type="button"
+                    <a th:href="@{/homepage}"><input class="btn btn-default" data-dismiss="modal" type="button"
                                                             value="Cancel"></a>
                     <input class="btn btn-success" type="submit" value="Update">
                 </div>

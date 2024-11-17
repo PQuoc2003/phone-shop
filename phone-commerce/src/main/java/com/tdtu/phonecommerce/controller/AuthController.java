@@ -63,6 +63,14 @@ public class AuthController {
             return "redirect:/register";
         }
 
+        User checkedUsersName = userService.findByUsername(newUser.getName());
+
+        if (checkedUsersName != null) {
+            model.addAttribute("errorRegister", "Đăng ký không thành công, username đã tồn tại");
+            return "redirect:/register";
+        }
+
+
 
         try {
             userService.saveUser(newUser);
