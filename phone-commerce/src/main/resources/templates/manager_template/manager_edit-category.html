@@ -22,7 +22,7 @@
             <div class="table-title">
                 <h2>Edit Category</h2>
             </div>
-            <form enctype="multipart/form-data" method="post" th:action="@{/manager/color/edit/{id}(id=${category.getId()})}" th:object="${category}">
+            <form enctype="multipart/form-data" method="post" th:action="@{/manager/category/edit/{id}(id=${category.getId()})}" th:object="${category}">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="id">Category ID</label>

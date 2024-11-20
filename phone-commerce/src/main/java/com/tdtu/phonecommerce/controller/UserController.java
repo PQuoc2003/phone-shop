@@ -173,7 +173,7 @@ public class UserController {
     }
 
 
-    @PostMapping("user/edit")
+    @PostMapping("/user/edit")
     public String editUserInfo(@ModelAttribute("editUser") User updateUser, RedirectAttributes redirectAttributes) {
 
 

@@ -1,14 +1,12 @@
 package com.tdtu.phonecommerce.controller;
 
 import com.tdtu.phonecommerce.dto.OrdersDTO;
-import com.tdtu.phonecommerce.models.CartItems;
-import com.tdtu.phonecommerce.models.Orders;
-import com.tdtu.phonecommerce.models.Product;
-import com.tdtu.phonecommerce.models.Roles;
+import com.tdtu.phonecommerce.models.*;
 import com.tdtu.phonecommerce.service.CartItemsService;
 import com.tdtu.phonecommerce.service.OrdersService;
 import com.tdtu.phonecommerce.service.ProductService;
 import com.tdtu.phonecommerce.service.UserService;
+import jakarta.persistence.criteria.Order;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -97,9 +95,9 @@ public class OrderController {
                 .anyMatch(r -> r.getAuthority().equals("ROLES_MANAGER"));
 
 
-        String status = "Đã giao hàng";
+        String status = "Đã Giao Hàng";
 
-        if(type.equals("cancel")) status = "Đã hủy";
+        if (type.equals("cancel")) status = "Đã Hủy";
 
         List<OrdersDTO> ordersDTOS = this.getOrdersDTOByStatus(status);
 
@@ -208,6 +206,33 @@ public class OrderController {
         }
 
         return "orders-details";
+
+    }
+
+
+    @GetMapping("/orders/history")
+    public String getOrdersHistoryPage(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getName();
+
+        List<Orders> ordersList = ordersService.getByUsernameAndStatus(username, "Chưa Giao Hàng");
+
+        ordersList.addAll(ordersService.getByUsernameAndStatus(username, "Đã Giao Hàng"));
+
+        List<OrdersDTO> ordersDTOList = new ArrayList<>();
+
+        for (Orders orders : ordersList) {
+            OrdersDTO ordersDTO = new OrdersDTO();
+            ordersDTO.convertToDTO(orders);
+            ordersDTOList.add(ordersDTO);
+        }
+
+
+        model.addAttribute("orders", ordersDTOList);
+
+        return "orders-history";
 
     }
 
