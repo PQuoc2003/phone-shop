@@ -2,7 +2,7 @@
 
 this is the backend part of ESDC final project.
 
-This is a restaurant system management.
+This is a phone ecommerce project
 
 
 Thank you ~~
