@@ -1,8 +1,3 @@
-## HELLO
+This is my pet project about phone ecommerce
 
-this is the backend part of ESDC final project.
-
-This is a phone ecommerce project
-
-
-Thank you ~~
+Thank you
